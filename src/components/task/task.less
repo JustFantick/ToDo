@@ -1,0 +1,67 @@
+.task {
+	@bg-color: rgb(46, 47, 49);
+	@bg-color-hover: rgb(57, 58, 60);
+	padding: #adapt(15, 10)[@value] #adapt(23, 13)[@value];
+	display: flex;
+	align-items: center;
+	background-color: @bg-color;
+	border-radius: 10px;
+	transition: all 0.3s ease-in;
+
+	&:hover {
+		background-color: @bg-color-hover;
+	}
+
+	div:first-child {
+		margin-right: #adapt(17, 10)[@value];
+	}
+
+	font-size: #adapt(27, 17)[@value];
+
+	&__status {
+		height: #adapt(25, 15)[@value];
+		width: #adapt(25, 15)[@value];
+		background-color: transparent;
+		border: 2px solid white;
+		border-radius: 50%;
+
+		&.done {
+			background-color: #fff;
+		}
+	}
+
+	&__title {
+		flex: 1 1 auto;
+		color: white;
+		line-height: 1.5;
+	}
+
+	&__star {
+		@star-color: #9696E6;
+		transition: all 0.3s ease-in;
+		font-size: 1.5em;
+		color: @bg-color;
+		text-shadow:
+			-0 -0.5px 0 @star-color,
+			0 -0.5px 0 @star-color,
+			-0 0.5px 0 @star-color,
+			0 0.5px 0 @star-color,
+			-0.5px -0 0 @star-color,
+			0.5px -0 0 @star-color,
+			-0.5px 0 0 @star-color,
+			0.5px 0 0 @star-color,
+			-0.5px -0.5px 0 @star-color,
+			0.5px -0.5px 0 @star-color,
+			-0.5px 0.5px 0 @star-color,
+			0.5px 0.5px 0 @star-color,
+			-0.5px -0.5px 0 @star-color,
+			0.5px -0.5px 0 @star-color,
+			-0.5px 0.5px 0 @star-color,
+			0.5px 0.5px 0 @star-color;
+
+		&.active {
+			color: @star-color;
+		}
+	}
+
+}

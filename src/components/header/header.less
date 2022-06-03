@@ -1,8 +1,3 @@
-#adaptiv-font(@pcSize, @mobSize, @dependWidth: 1024) {
-	@sizeDiff: @pcSize - @mobSize;
-	font-size: calc(@mobSize * 1px + (@pcSize - @mobSize) * ((100vw - 320px) / (@dependWidth - 320)));
-}
-
 .header {
 	display: flex;
 	justify-content: space-between;
@@ -11,20 +6,21 @@
 	&__title {
 		color: #fff;
 		line-height: 1.15;
+		font-family: 'Roboto';
 
 		h1 {
-			#adaptiv-font(40, 24);
+			font-size: #adapt(40, 24)[@value];
 		}
 
 		p {
-			#adaptiv-font(25, 18);
+			font-size: #adapt(25, 18)[@value];
 		}
 	}
 }
 
 .settings-button {
-	height: 34px;
-	width: 35px;
+	height: #adapt(40, 30)[@value];
+	width: #adapt(40, 30)[@value];
 	background-color: rgb(39, 39, 39);
 	position: relative;
 	border-radius: 5px;
@@ -35,7 +31,7 @@
 		background-color: rgb(63, 63, 63);
 	}
 
-	@circles-size: 5px;
+	@circles-size: #adapt(6, 4)[@value];
 
 	&::after,
 	&::before {

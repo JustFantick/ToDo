@@ -1,10 +1,14 @@
 @import url('./fonts/fonts.less');
 @import url('./nullstyle');
 
+#adapt(@pcSize, @mobSize, @dependWidth: 1280) {
+	@sizeDiff: @pcSize - @mobSize;
+	@value: calc(@mobSize * 1px + (@pcSize - @mobSize) * ((100vw - 320px) / (@dependWidth - 320)));
+}
+
 body {
 	font-family: 'Quicksand';
 	font-weight: normal;
-	//font-family: 'Roboto';
 }
 
 .wrapper {
@@ -15,3 +19,7 @@ body {
 
 	padding: 3vh 3vw;
 }
+
+@import url('./components/main/main');
+@import url('./components/header/header');
+@import url('./components/task/task');
