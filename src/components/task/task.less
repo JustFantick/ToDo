@@ -1,15 +1,13 @@
 .task {
-	@bg-color: rgb(46, 47, 49);
-	@bg-color-hover: rgb(57, 58, 60);
-	padding: #adapt(15, 10)[@value] #adapt(23, 13)[@value];
+	padding: #adapt(12, 8)[@value] #adapt(23, 13)[@value] #adapt(12, 8)[@value] #adapt(23, 13)[@value];
 	display: flex;
 	align-items: center;
-	background-color: @bg-color;
+	background-color: @bg-elemet-color;
 	border-radius: 10px;
 	transition: all 0.3s ease-in;
 
 	&:hover {
-		background-color: @bg-color-hover;
+		background-color: @bg-element-color-hover;
 	}
 
 	div:first-child {
@@ -24,6 +22,8 @@
 		background-color: transparent;
 		border: 2px solid white;
 		border-radius: 50%;
+		transition: all 0.3s ease-in;
+		cursor: pointer;
 
 		&.done {
 			background-color: #fff;
@@ -40,7 +40,8 @@
 		@star-color: #9696E6;
 		transition: all 0.3s ease-in;
 		font-size: 1.5em;
-		color: @bg-color;
+		cursor: pointer;
+		color: @bg-elemet-color;
 		text-shadow:
 			-0 -0.5px 0 @star-color,
 			0 -0.5px 0 @star-color,

@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react'
 
-class Task extends Component {
-	render() {
-		return (
-			<div className='task'>
-				<div class="task__status"></div>
-				<div class="task__title">
-					Task text
-				</div>
-				<div class="task__star">★</div>
+function Task(props) {
+	let statusChange = (e) => e.target.classList.toggle('done');
+	let starChange = (e) => e.target.classList.toggle('active');
 
-			</div>
-		);
-	}
+	return (
+		<div className='task'>
+			<div onClick={statusChange} className="task__status" />
+			<div className="task__title"> {props.title} </div>
+			<div onClick={starChange} className="task__star">★</div>
+
+		</div>
+	)
 }
 
 export default Task;

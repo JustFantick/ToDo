@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../header/header.jsx';
 import Task from '../task/task.jsx';
+import AddTask from '../footer/footer.jsx';
 
 class Main extends Component {
 	render() {
@@ -9,12 +10,13 @@ class Main extends Component {
 				<Header />
 
 				<div className="tasks-container">
-					<Task />
+					<Task title={"Title from props"} />
+					<Task title={"Second task"} />
+					<Task title={"Thirs task"} />
+
 				</div>
 
-				<footer className="add-task">
-
-				</footer>
+				<AddTask />
 			</main>
 		);
 	}
