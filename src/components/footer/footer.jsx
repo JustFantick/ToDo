@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react';
 
-function AddTask() {
-	function handleClick(e) {
+class AddTask extends Component {
+	constructor(props) {
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	handleClick(e) {
 		let target = e.target;
 		let plus = document.querySelector('.add-task__plus');
 		let input = document.querySelector('.add-task__title');
@@ -21,17 +26,15 @@ function AddTask() {
 		}
 	}
 
-	function unFocus(e) {
-		document.querySelector(".add-task").classList.remove('focused');
+	render() {
+		return (
+			<footer className='add-task' onClick={this.handleClick}>
+				<div className="add-task__plus"></div>
+				<input type={'text'} placeholder='Enter next task`s title' className="add-task__title" onKeyDown={this.props.func} />
+
+			</footer>
+		);
 	}
-
-	return (
-		<footer className='add-task' onClick={handleClick}>
-			<div className="add-task__plus"></div>
-			<input type={"text"} placeholder='Enter next task`s title' className="add-task__title" />
-
-		</footer>
-	)
 }
 
 export default AddTask;
