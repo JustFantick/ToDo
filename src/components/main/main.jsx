@@ -7,7 +7,7 @@ class Main extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			taskTitles: ["Components from state"],
+			taskTitles: ["Test task"],
 		}
 
 		this.keyIdentify = this.keyIdentify.bind(this);

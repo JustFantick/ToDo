@@ -13,11 +13,13 @@ class TaskContainer extends Component {
 	render() {
 		return (
 			<div className="tasks-container">
-				{
-					this.state.tasks.map((title, index) => (
-						<Task key={index} title={title} />
-					))
-				}
+				<div className='tasks-container__body'>
+					{
+						this.state.tasks.map((title, index) => (
+							<Task key={index} title={title} />
+						))
+					}
+				</div>
 			</div>
 		);
 	}

@@ -1,6 +1,4 @@
 import React from "react";
-import "./App.less";
-
 import background from "../img/bg1.jpg"
 import Main from "./main/main.jsx";
 
