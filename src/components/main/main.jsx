@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../header/header.jsx';
-import AddTask from '../footer/footer.jsx';
+import AddTask from '../add-task/add-task.jsx'
 import TaskContainer from '../taskContainer/task-container.jsx';
 
 class Main extends Component {
