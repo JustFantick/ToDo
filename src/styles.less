@@ -17,7 +17,100 @@ body {
 	background-size: cover;
 	background-position: center;
 
-	padding: 3vh 3vw;
+	overflow: hidden;
+
+	position: relative;
+
+	aside {
+		position: absolute;
+		top: 0;
+		right: -100%;
+	}
+
+	&.active {
+		aside {
+			right: 0;
+			width: 90%;
+		}
+	}
+
+	@media (min-width: 425px) {
+		&.active {
+			aside {
+				right: 0;
+				width: 70%;
+			}
+		}
+	}
+
+	@media (min-width: 600px) {
+		display: flex;
+
+		main,
+		aside {
+			transition: all 0.3s ease-in;
+		}
+
+		main {
+			flex: 0 0 100%;
+		}
+
+		aside {
+			flex: 0 0 0%;
+			position: static;
+		}
+
+		&.active {
+			main {
+				flex: 0 0 50%;
+			}
+
+			aside {
+				flex: 0 0 50%;
+				position: static;
+			}
+		}
+	}
+
+	@media (min-width: 710px) {
+		&.active {
+			main {
+				flex: 0 0 55%;
+			}
+
+			aside {
+				flex: 0 0 45%;
+				position: static;
+			}
+		}
+	}
+
+	@media (min-width: 850px) {
+		&.active {
+			main {
+				flex: 0 0 60%;
+			}
+
+			aside {
+				flex: 0 0 40%;
+				position: static;
+			}
+		}
+	}
+
+	@media (min-width: 1600px) {
+		&.active {
+			main {
+				flex: 0 0 65%;
+			}
+
+			aside {
+				flex: 0 0 35%;
+				position: static;
+			}
+		}
+	}
+
 }
 
 @bg-elemet-color: rgb(46, 47, 49);
@@ -27,3 +120,6 @@ body {
 @import url('./components/header/header');
 @import url('./components/task/task');
 @import url('./components/add-task/add-task');
+@import url('./components/sidebar/sidebar');
+@import url('./components/step/step');
+@import url('./components/sidebar-header/sidebar-header');
