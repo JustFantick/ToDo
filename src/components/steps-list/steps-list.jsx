@@ -8,15 +8,16 @@ class StepsList extends Component {
 		this.state = {
 			steps: this.props.steps
 		}
-	}
 
+	}
+	
 
 	render() {
 		return (
 			<ul className='steps-list'>
 				{
 					this.state.steps.map((step, index) => (
-						<Step key={index} text={step} />
+						<Step key={index} text={step} func={this.deleteStep} />
 					))
 				}
 			</ul>

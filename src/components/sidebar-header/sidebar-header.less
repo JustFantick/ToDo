@@ -41,10 +41,12 @@
 	padding-left: 5px;
 
 	&__plus {
-		height: #adapt(20, 15)[@value];
-		width: #adapt(20, 15)[@value];
+		transition: all 0.3s ease-in;
+		height: #adapt(20, 18)[@value];
+		width: #adapt(20, 18)[@value];
 		position: relative;
 		cursor: pointer;
+		flex: 0 0 auto;
 
 		&::before,
 		&::after {
@@ -71,6 +73,10 @@
 			left: 50%;
 			transform: translate(-50%, -50%);
 		}
+	}
+
+	&.focused .add-step__plus {
+		transform: rotate(-45deg);
 	}
 
 	&__title {

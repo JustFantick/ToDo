@@ -13,20 +13,30 @@ class Step extends Component {
 		this.handleBlur = this.handleBlur.bind(this);
 	}
 	handleFocus(e) {
-		e.target.closest('.step').querySelector('.step__btns').classList.add('active');
+		let currentParent = e.target.closest('.step');
+		currentParent.querySelector('.step__btns').classList.add('active');
+
+		document.querySelector('.wrapper').addEventListener('click', function (e) {
+			if (e.target.closest('.step') !== currentParent) {
+				currentParent.querySelector('.step__btns').classList.remove('active');
+				document.querySelector('.wrapper').removeEventListener('click', function (e) { });
+			}
+		})
 	}
 	handleBlur(e) {
-		e.target.closest('.step').querySelector('.step__btns').classList.remove('active');
+		if (e.target !== 0) {
+			e.target.closest('.step').querySelector('.step__btns').classList.remove('active');
+		}
 	}
 
 	render() {
 		return (
-			<li className='step'>
+			<li className='step' onClick={this.props.func}>
 				<div className='step__btns'>
-					<Status pc={23} mb={15} />
-					<DeleteStep pc={23} mb={15} />
+					<Status pc={23} mb={19} />
+					<DeleteStep pc={23} mb={19} />
 				</div>
-				<div className="step__title" contentEditable="true" onFocus={this.handleFocus} onBlur={this.handleBlur}>{this.state.stepText}</div>
+				<div className="step__title" contentEditable="true" onFocus={this.handleFocus} >{this.state.stepText}</div>
 			</li>
 		);
 	}

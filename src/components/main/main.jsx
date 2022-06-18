@@ -10,10 +10,10 @@ class Main extends Component {
 			taskTitles: ["Test task"],
 		}
 
-		this.keyIdentify = this.keyIdentify.bind(this);
+		this.addTask = this.addTask.bind(this);
 	}
 
-	keyIdentify(e) {
+	addTask(e) {
 		if (e.which === 13 && document.querySelector('.add-task__title').value !== '') {
 
 			let temp = this.state.taskTitles;
@@ -22,6 +22,8 @@ class Main extends Component {
 			this.setState({
 				taskTitles: temp
 			});
+
+			document.querySelector('.add-task__title').value = '';
 		}
 	}
 
@@ -32,7 +34,7 @@ class Main extends Component {
 
 				<TaskContainer tasks={this.state.taskTitles} />
 
-				<AddTask func={this.keyIdentify} />
+				<AddTask func={this.addTask} />
 			</main>
 		);
 	}
