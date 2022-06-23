@@ -19,6 +19,11 @@ body {
 
 	overflow: hidden;
 
+	main,
+	aside {
+		transition: all 0.3s ease-in;
+	}
+
 	position: relative;
 
 	aside {
@@ -37,19 +42,29 @@ body {
 	@media (min-width: 425px) {
 		&.active {
 			aside {
-				right: 0;
 				width: 70%;
 			}
 		}
 	}
 
-	@media (min-width: 600px) {
-		display: flex;
-
-		main,
-		aside {
-			transition: all 0.3s ease-in;
+	@media (min-width: 490px) {
+		&.active {
+			aside {
+				width: 60%;
+			}
 		}
+	}
+
+	@media (min-width: 610px) {
+		&.active {
+			aside {
+				width: 50%;
+			}
+		}
+	}
+
+	@media (min-width: 670px) {
+		display: flex;
 
 		main {
 			flex: 0 0 100%;
@@ -123,3 +138,4 @@ body {
 @import url('./components/sidebar/sidebar');
 @import url('./components/step/step');
 @import url('./components/sidebar-header/sidebar-header');
+@import url('./components/add-file/add-file');

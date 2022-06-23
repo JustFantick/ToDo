@@ -1,12 +1,33 @@
 .sidebar {
 	background-color: rgb(39, 39, 39);
-
 	padding: 3vh #adapt(30, 15)[@value];
 	height: 100%;
 	border-radius: 15px 0 0 15px;
 	transition: all 0.3s ease-in;
 
+	overflow: hidden;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+
+	#generalChildParams {
+		background-color: rgb(50, 50, 50);
+		border-radius: 15px;
+	}
+
+	&__header {
+		#generalChildParams();
+		padding: 15px;
+	}
+
+	&__add-file {
+		overflow: hidden;
+		flex: 1 1 auto;
+		margin: #adapt(35, 30)[@value] 0;
+
+		&>div {
+			#generalChildParams();
+		}
+	}
 }
