@@ -15,8 +15,8 @@ class Sidebar extends Component {
 				</div>
 
 				<div className='sidebar__bottom'>
-					<div className='edditing-time'></div>
-					<div className='delete'></div>
+					<div className='edditing-time'>Last edit: 12:35</div>
+					<div className='delete icon-bin'></div>
 				</div>
 
 			</aside>

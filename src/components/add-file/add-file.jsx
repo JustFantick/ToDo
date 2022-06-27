@@ -8,6 +8,7 @@ class AddFile extends Component {
 		this.dragStartHandler = this.dragStartHandler.bind(this);
 		this.dragLeaveHandler = this.dragLeaveHandler.bind(this);
 		this.onDropHandler = this.onDropHandler.bind(this);
+		this.deleteFile = this.deleteFile.bind(this);
 		this.state = {
 			isPc: true,
 			filesChosen: false,
@@ -38,7 +39,20 @@ class AddFile extends Component {
 		this.setState({
 			filesChosen: temp
 		});
-		console.log(this.state.chosenFiles);
+	}
+	deleteFile(e) {
+		let fileName = e.target.closest('.chosen-file').querySelector('.chosen-file__name').textContent;
+		let temp = this.state.chosenFiles;
+
+		temp.forEach(file => {
+			if (file.name === fileName) {
+				temp.splice(temp.indexOf(file), 1);
+			}
+		})
+
+		this.setState({
+			chosenFiles: temp
+		});
 	}
 
 	render() {
@@ -56,13 +70,11 @@ class AddFile extends Component {
 					<input className='add-file__input' type={'file'} name={'file'} />
 				</div>
 				<ul className='add-file__chosen'>
-
 					{
 						this.state.chosenFiles.map((file, index) => (
-							<ChosenFile fileName={file.name} key={index} />
+							<ChosenFile fileName={file.name} key={index} func={this.deleteFile} />
 						))
 					}
-
 				</ul>
 			</div>
 
