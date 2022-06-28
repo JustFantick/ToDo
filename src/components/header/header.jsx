@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react'
 
-class Header extends Component {
-	render() {
-		return (
-			<header className="header">
-				<div className="header__title">
-					<h1>Your`s day</h1>
-					<p>date & time</p>
-				</div>
-				<div className="settings-button">
-					<span></span>
-				</div>
-			</header>
-		);
-	}
+export default function Header() {
+	var options = {
+		month: 'long',
+		day: 'numeric',
+		weekday: 'short',
+	};
+	return (
+		<header className="header">
+			<div className="header__title">
+				<h1>Your`s day</h1>
+				<p> {new Date().toLocaleString('en-EU', options)} </p>
+			</div>
+			<div className="settings-button">
+				<span></span>
+			</div>
+		</header>
+	)
 }
-
-export default Header;
