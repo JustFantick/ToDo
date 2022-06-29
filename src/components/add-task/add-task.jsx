@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 class AddTask extends Component {
 	constructor(props) {
 		super(props);
-		this.handleClick = this.handleClick.bind(this);
+		this.interactBlock = this.interactBlock.bind(this);
 	}
 
-	handleClick(e) {
+	interactBlock(e) {
 		let target = e.target;
 		let plus = document.querySelector('.add-task__plus');
 		let input = document.querySelector('.add-task__title');
@@ -28,7 +28,7 @@ class AddTask extends Component {
 
 	render() {
 		return (
-			<footer className='add-task' onClick={this.handleClick}>
+			<footer className='add-task' onClick={this.interactBlock}>
 				<div className="add-task__plus"></div>
 				<input type={'text'} placeholder='Enter next task`s title' className="add-task__title" onKeyDown={this.props.func} />
 

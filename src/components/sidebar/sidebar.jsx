@@ -7,7 +7,11 @@ class Sidebar extends Component {
 		return (
 			<aside className="sidebar">
 				<div className='sidebar__header'>
-					<SidebarHeader />
+					<SidebarHeader
+						stepsList={this.props.stepsList}
+						addStep={this.props.addStep}
+						deleteStep={this.props.deleteStep}
+					/>
 				</div>
 
 				<div className='sidebar__add-file'>

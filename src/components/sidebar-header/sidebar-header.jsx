@@ -6,35 +6,7 @@ import Step from '../step/step.jsx';
 class SidebarHeader extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { stepsList: ['Test step'] }
-		this.addStep = this.addStep.bind(this);
-		this.deleteStep = this.deleteStep.bind(this);
 		this.interactInput = this.interactInput.bind(this);
-	}
-	addStep(e) {
-		if (e.which === 13 && document.querySelector('.add-step__title').value !== '') {
-			let temp = this.state.stepsList;
-			temp.push(document.querySelector('.add-step__title').value);
-
-			this.setState({
-				stepsList: temp,
-			})
-
-			document.querySelector('.add-step__title').value = '';
-		}
-	}
-
-	deleteStep(e) {
-		if (e.target.classList.contains('delete-step')) {
-			let value = e.target.closest('.step').querySelector('.step__title').innerText;
-			let temp = this.state.stepsList;
-
-			temp.splice(temp.indexOf(value), 1);
-
-			this.setState({
-				stepsList: temp,
-			})
-		}
 	}
 
 	interactInput(e) {
@@ -66,15 +38,15 @@ class SidebarHeader extends Component {
 				</div>
 				<ul className='steps-list'>
 					{
-						this.state.stepsList.map((step, index) => (
-							<Step key={index} text={step} func={this.deleteStep} />
+						this.props.stepsList.map((step, index) => (
+							<Step key={index} text={step} func={this.props.deleteStep} />
 						))
 					}
 				</ul>
 
 				<div className='add-step' onClick={this.interactInput}>
 					<div className="add-step__plus" ></div>
-					<input type={'text'} placeholder='Enter next task`s title' className="add-step__title" onKeyDown={this.addStep} />
+					<input type={'text'} placeholder='Enter next task`s title' className="add-step__title" onKeyDown={this.props.addStep} />
 				</div>
 			</div>
 		);
