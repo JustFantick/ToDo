@@ -76,7 +76,7 @@ class App extends Component {
 
 			temp[this.state.taskIndex].steps = newSteps;
 
-			this.setState({ stepsList: temp })
+			this.setState({ tasks: temp })
 		}
 	}
 
