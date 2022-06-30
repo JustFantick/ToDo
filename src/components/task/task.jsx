@@ -5,11 +5,10 @@ function Task(props) {
 	let starChange = (e) => e.target.classList.toggle('active');
 
 	return (
-		<div className='task'>
+		<div className='task' onClick={props.chooseTask} index={props.index}>
 			<Status pc={25} mb={20} />
 			<div className="task__title"> {props.title} </div>
 			<div onClick={starChange} className="task__star">★</div>
-
 		</div>
 	)
 }

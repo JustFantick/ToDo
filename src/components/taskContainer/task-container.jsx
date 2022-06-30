@@ -7,8 +7,8 @@ class TaskContainer extends Component {
 			<div className="tasks-container">
 				<div className='tasks-container__body'>
 					{
-						this.props.tasks.map((title, index) => (
-							<Task key={index} title={title} />
+						this.props.tasks.map((task, index) => (
+							<Task key={index} index={index} title={task.title} chooseTask={this.props.chooseTask} />
 						))
 					}
 				</div>

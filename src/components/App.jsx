@@ -9,17 +9,47 @@ class App extends Component {
 		this.addStep = this.addStep.bind(this);
 		this.deleteStep = this.deleteStep.bind(this);
 		this.addTask = this.addTask.bind(this);
-		this.titlesChangeHandler = this.titlesChangeHandler.bind(this);
+		this.onTaskTitleChange = this.onTaskTitleChange.bind(this);
+		this.chooseTask = this.chooseTask.bind(this);
 
 		this.state = {
-			stepsList: ['Test step'],
-			tasksList: ["Test task"]
+			tasks:
+				[{
+					title: 'Test task',
+					steps: ['test step'],
+					files: [],
+				},
+				{
+					title: 'Second task',
+					steps: [],
+					files: [],
+				}],
+			taskIndex: 0,
 		}
 	}
-	titlesChangeHandler(e) {
-		//Реализовать после того как будет 
-		//сделано "открытие" доп - меню таска
-	}
+
+	// componentDidMount() {
+	// 	let tasks = [
+	// 		{
+	// 			title: 'Test task',
+	// 			steps: ['test step'],
+	// 			files: [],
+	// 		},
+	// 		{
+	// 			title: 'Second task',
+	// 			steps: [],
+	// 			files: [],
+	// 		}
+	// 	];
+	// 	let temp = {
+	// 		title: 'Third task',
+	// 		steps: [],
+	// 		files: [],
+	// 	}
+
+	// 	tasks.push(temp);
+	// 	console.log(tasks);
+	// }
 
 	addStep(e) {
 		if (e.which === 13 && document.querySelector('.add-step__title').value !== '') {
@@ -27,7 +57,7 @@ class App extends Component {
 			temp.push(document.querySelector('.add-step__title').value);
 
 			this.setState({
-				stepsList: temp,
+				tasks: temp,
 			})
 
 			document.querySelector('.add-step__title').value = '';
@@ -49,25 +79,64 @@ class App extends Component {
 
 	addTask(e) {
 		if (e.which === 13 && document.querySelector('.add-task__title').value !== '') {
-
-			let temp = this.state.tasksList;
-			temp.push(document.querySelector('.add-task__title').value);
+			let temp = this.state.tasks;
+			let newTask = {
+				title: document.querySelector('.add-task__title').value,
+				steps: [],
+				files: [],
+			}
+			temp.push(newTask);
 
 			this.setState({
-				tasksList: temp
+				tasks: temp
 			});
 
 			document.querySelector('.add-task__title').value = '';
 		}
 	}
 
+	onTaskTitleChange(e) {
+		let temp = this.state.tasks;
+		let changedTask = temp[this.state.taskIndex];
+		changedTask.title = e.target.textContent;
+		temp[this.state.taskIndex] = changedTask;
+
+		this.setState({
+			tasks: temp,
+		})
+		//косо-криво но работает
+	}
+
+	chooseTask(e) {
+		let targetParent = e.target.closest('.task');
+		let targetIndex = targetParent.getAttribute('index');
+
+		this.setState({ taskIndex: targetIndex })
+
+		document.querySelectorAll('.task').forEach((task) => {
+			task.classList.remove('active');
+		});
+
+		targetParent.classList.toggle('active');
+		document.querySelector('.wrapper').classList.add('active');
+
+		document.querySelector('.main').addEventListener('click', function (e) {
+			if (!e.target.closest('.task'))
+				document.querySelector('.wrapper').classList.remove('active');
+		}, { 'once': true });
+	}
+
 	render() {
 		return (
-			<div className="wrapper active" style={{ backgroundImage: `url(${background})` }}>
-				<Main tasksList={this.state.tasksList} addTask={this.addTask} />
+			<div className="wrapper" style={{ backgroundImage: `url(${background})` }}>
+				<Main tasksList={this.state.tasks}
+					addTask={this.addTask}
+					chooseTask={this.chooseTask} />
 
 				<Sidebar
-					stepsList={this.state.stepsList}
+					tasksList={this.state.tasks}
+					currentTask={this.state.taskIndex}
+					onTitleChange={this.onTaskTitleChange}
 					addStep={this.addStep}
 					deleteStep={this.deleteStep}
 				/>

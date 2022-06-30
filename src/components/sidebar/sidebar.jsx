@@ -8,9 +8,11 @@ class Sidebar extends Component {
 			<aside className="sidebar">
 				<div className='sidebar__header'>
 					<SidebarHeader
-						stepsList={this.props.stepsList}
+						tasksList={this.props.tasksList}
+						currentTask={this.props.currentTask}
 						addStep={this.props.addStep}
 						deleteStep={this.props.deleteStep}
+						onTitleChange={this.props.onTitleChange}
 					/>
 				</div>
 

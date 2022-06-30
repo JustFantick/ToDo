@@ -9,7 +9,7 @@ class Main extends Component {
 			<main className="main">
 				<Header />
 
-				<TaskContainer tasks={this.props.tasksList} />
+				<TaskContainer tasks={this.props.tasksList} chooseTask={this.props.chooseTask} />
 
 				<AddTask func={this.props.addTask} />
 			</main>
