@@ -53,12 +53,13 @@ class App extends Component {
 
 	addStep(e) {
 		if (e.which === 13 && document.querySelector('.add-step__title').value !== '') {
-			let temp = this.state.stepsList;
-			temp.push(document.querySelector('.add-step__title').value);
+			let temp = this.state.tasks;
+			let newSteps = this.state.tasks[this.state.taskIndex].steps;
 
-			this.setState({
-				tasks: temp,
-			})
+			newSteps.push(document.querySelector('.add-step__title').value);
+			temp[this.state.taskIndex].steps = newSteps;
+
+			this.setState({ tasks: temp });
 
 			document.querySelector('.add-step__title').value = '';
 		}
@@ -66,14 +67,16 @@ class App extends Component {
 
 	deleteStep(e) {
 		if (e.target.classList.contains('delete-step')) {
-			let value = e.target.closest('.step').querySelector('.step__title').innerText;
-			let temp = this.state.stepsList;
+			let temp = this.state.tasks;
 
-			temp.splice(temp.indexOf(value), 1);
+			let newSteps = this.state.tasks[this.state.taskIndex].steps;
+			let value =
+				e.target.closest('.step').querySelector('.step__title').innerText;
+			newSteps.splice(temp.indexOf(value), 1);
 
-			this.setState({
-				stepsList: temp,
-			})
+			temp[this.state.taskIndex].steps = newSteps;
+
+			this.setState({ stepsList: temp })
 		}
 	}
 
@@ -87,9 +90,7 @@ class App extends Component {
 			}
 			temp.push(newTask);
 
-			this.setState({
-				tasks: temp
-			});
+			this.setState({ tasks: temp });
 
 			document.querySelector('.add-task__title').value = '';
 		}
