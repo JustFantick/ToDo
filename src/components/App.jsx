@@ -110,21 +110,27 @@ class App extends Component {
 
 	chooseTask(e) {
 		let targetParent = e.target.closest('.task');
-		let targetIndex = targetParent.getAttribute('index');
 
-		this.setState({ taskIndex: targetIndex })
+		if (!e.target.closest('.status') && !e.target.closest('.task__star')) {
+			console.log(e.target);
+			let targetIndex = targetParent.getAttribute('index');
 
-		document.querySelectorAll('.task').forEach((task) => {
-			task.classList.remove('active');
-		});
+			this.setState({ taskIndex: targetIndex })
 
-		targetParent.classList.toggle('active');
-		document.querySelector('.wrapper').classList.add('active');
+			document.querySelectorAll('.task').forEach((task) => {
+				task.classList.remove('active');
+			});
 
-		document.querySelector('.main').addEventListener('click', function (e) {
-			if (!e.target.closest('.task'))
-				document.querySelector('.wrapper').classList.remove('active');
-		}, { 'once': true });
+			targetParent.classList.toggle('active');
+			document.querySelector('.wrapper').classList.add('active');
+
+			document.querySelector('.main').addEventListener('click', function (e) {
+				if (!e.target.closest('.task')) {
+					document.querySelector('.wrapper').classList.remove('active');
+					document.querySelector('.main').removeEventListener('click', function (e) { })
+				}
+			});
+		}
 	}
 
 	render() {

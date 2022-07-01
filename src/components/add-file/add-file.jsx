@@ -10,25 +10,17 @@ class AddFile extends Component {
 		this.onDropHandler = this.onDropHandler.bind(this);
 		this.deleteFile = this.deleteFile.bind(this);
 		this.state = {
-			isPc: true,
-			filesChosen: false,
 			chosenFiles: [],
 		}
 	}
 
 	dragStartHandler(e) {
 		e.preventDefault();
-		this.setState({
-			filesChosen: true,
-		});
 		document.querySelector('.add-file').classList.add('active');
 
 	}
 	dragLeaveHandler(e) {
 		e.preventDefault();
-		this.setState({
-			filesChosen: false,
-		});
 		document.querySelector('.add-file').classList.remove('active');
 	}
 	onDropHandler(e) {
@@ -36,9 +28,7 @@ class AddFile extends Component {
 		let files = [...e.dataTransfer.files];
 		let temp = this.state.chosenFiles;
 		files.forEach(file => temp.push(file));
-		this.setState({
-			filesChosen: temp
-		});
+		this.setState({ chosenFiles: temp });
 	}
 	deleteFile(e) {
 		let fileName = e.target.closest('.chosen-file').querySelector('.chosen-file__name').textContent;
@@ -50,9 +40,7 @@ class AddFile extends Component {
 			}
 		})
 
-		this.setState({
-			chosenFiles: temp
-		});
+		this.setState({ chosenFiles: temp });
 	}
 
 	render() {
