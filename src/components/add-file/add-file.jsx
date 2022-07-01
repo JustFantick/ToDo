@@ -9,9 +9,7 @@ class AddFile extends Component {
 		this.dragLeaveHandler = this.dragLeaveHandler.bind(this);
 		this.onDropHandler = this.onDropHandler.bind(this);
 		this.deleteFile = this.deleteFile.bind(this);
-		this.state = {
-			chosenFiles: [],
-		}
+		this.state = { chosenFiles: [] }
 	}
 
 	dragStartHandler(e) {

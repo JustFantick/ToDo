@@ -16,7 +16,7 @@ class App extends Component {
 			tasks:
 				[{
 					title: 'Test task',
-					steps: ['test step'],
+					steps: [],
 					files: [],
 				},
 				{
@@ -27,29 +27,6 @@ class App extends Component {
 			taskIndex: 0,
 		}
 	}
-
-	// componentDidMount() {
-	// 	let tasks = [
-	// 		{
-	// 			title: 'Test task',
-	// 			steps: ['test step'],
-	// 			files: [],
-	// 		},
-	// 		{
-	// 			title: 'Second task',
-	// 			steps: [],
-	// 			files: [],
-	// 		}
-	// 	];
-	// 	let temp = {
-	// 		title: 'Third task',
-	// 		steps: [],
-	// 		files: [],
-	// 	}
-
-	// 	tasks.push(temp);
-	// 	console.log(tasks);
-	// }
 
 	addStep(e) {
 		if (e.which === 13 && document.querySelector('.add-step__title').value !== '') {
