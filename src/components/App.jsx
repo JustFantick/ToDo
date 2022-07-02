@@ -16,7 +16,7 @@ class App extends Component {
 			tasks:
 				[{
 					title: 'Test task',
-					steps: [],
+					steps: ['1', '2', '2'],
 					files: [],
 				},
 				{
@@ -104,6 +104,9 @@ class App extends Component {
 			document.querySelector('.main').addEventListener('click', function (e) {
 				if (!e.target.closest('.task')) {
 					document.querySelector('.wrapper').classList.remove('active');
+					document.querySelectorAll('.task').forEach((task) => {
+						task.classList.remove('active');
+					});
 					document.querySelector('.main').removeEventListener('click', function (e) { })
 				}
 			});

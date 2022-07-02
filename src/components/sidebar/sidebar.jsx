@@ -14,11 +14,12 @@ class Sidebar extends Component {
 						deleteStep={this.props.deleteStep}
 						onTitleChange={this.props.onTitleChange}
 					/>
+					<AddFile />
+
 				</div>
 
-				<div className='sidebar__add-file'>
-					<AddFile />
-				</div>
+				{/* <div className='sidebar__add-file'>
+				</div> */}
 
 				<div className='sidebar__bottom'>
 					<div className='edditing-time'>Last edit: 12:35</div>
