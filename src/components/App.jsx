@@ -10,6 +10,7 @@ class App extends Component {
 		this.deleteStep = this.deleteStep.bind(this);
 		this.addTask = this.addTask.bind(this);
 		this.onTaskTitleChange = this.onTaskTitleChange.bind(this);
+		this.onTaskStepChange = this.onTaskStepChange.bind(this);
 		this.chooseTask = this.chooseTask.bind(this);
 
 		this.state = {
@@ -75,21 +76,21 @@ class App extends Component {
 
 	onTaskTitleChange(e) {
 		let temp = this.state.tasks;
-		let changedTask = temp[this.state.taskIndex];
-		changedTask.title = e.target.textContent;
-		temp[this.state.taskIndex] = changedTask;
+		temp[this.state.taskIndex].title = e.target.textContent;
+		this.setState({ tasks: temp });
+	}
 
-		this.setState({
-			tasks: temp,
-		})
-		//косо-криво но работает
+	onTaskStepChange(e) {
+		let temp = this.state.tasks;
+		let currentStepIndex = e.target.closest('.step').getAttribute('index');
+		temp[this.state.taskIndex].steps[currentStepIndex] = e.target.textContent;
+		this.setState({ tasks: temp });
 	}
 
 	chooseTask(e) {
 		let targetParent = e.target.closest('.task');
 
 		if (!e.target.closest('.status') && !e.target.closest('.task__star')) {
-			console.log(e.target);
 			let targetIndex = targetParent.getAttribute('index');
 
 			this.setState({ taskIndex: targetIndex })
@@ -124,6 +125,7 @@ class App extends Component {
 					tasksList={this.state.tasks}
 					currentTask={this.state.taskIndex}
 					onTitleChange={this.onTaskTitleChange}
+					onTaskStepChange={this.onTaskStepChange}
 					addStep={this.addStep}
 					deleteStep={this.deleteStep}
 				/>

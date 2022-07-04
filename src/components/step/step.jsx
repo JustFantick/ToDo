@@ -28,12 +28,19 @@ class Step extends Component {
 
 	render() {
 		return (
-			<li className='step' onClick={this.props.func}>
+			<li className='step' onClick={this.props.func} index={this.props.index}>
 				<div className='step__btns'>
 					<Status pc={23} mb={19} />
 					<DeleteStep pc={23} mb={19} />
 				</div>
-				<div className="step__title" contentEditable="true" onFocus={this.handleFocus} >{this.props.text}</div>
+				<div className="step__title"
+					contentEditable="true"
+					suppressContentEditableWarning="true"
+					onFocus={this.handleFocus}
+					onBlur={this.props.onTaskStepChange}
+				>
+					{this.props.text}
+				</div>
 			</li>
 		);
 	}

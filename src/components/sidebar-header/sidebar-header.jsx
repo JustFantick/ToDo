@@ -36,7 +36,8 @@ class SidebarHeader extends Component {
 					<Status mb={22} pc={28} />
 					<div className="sidebar-task__title"
 						contentEditable="true"
-						onKeyUp={this.props.onTitleChange}
+						suppressContentEditableWarning="true"
+						onBlur={this.props.onTitleChange}
 					>
 						{this.props.tasksList[this.props.currentTask].title}
 					</div>
@@ -44,7 +45,13 @@ class SidebarHeader extends Component {
 				<ul className='steps-list'>
 					{
 						this.props.tasksList[this.props.currentTask].steps.map((step, index) => (
-							<Step key={index} text={step} func={this.props.deleteStep} />
+							<Step
+								key={index}
+								text={step}
+								index={index}
+								func={this.props.deleteStep}
+								onTaskStepChange={this.props.onTaskStepChange}
+							/>
 						))
 					}
 				</ul>
