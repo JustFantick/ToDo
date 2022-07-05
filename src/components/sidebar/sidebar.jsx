@@ -15,7 +15,10 @@ class Sidebar extends Component {
 						onTitleChange={this.props.onTitleChange}
 						onTaskStepChange={this.props.onTaskStepChange}
 					/>
-					<AddFile />
+					<AddFile deleteFile={this.props.deleteFile}
+						onDropHandler={this.props.onDropHandler}
+						chosenFiles={this.props.chosenFiles}
+						filesURL={this.props.filesURL} />
 
 				</div>
 

@@ -5,8 +5,9 @@ import Step from '../step/step.jsx';
 
 class SidebarHeader extends Component {
 	constructor(props) {
-		super(props)
+		super(props);
 		this.interactInput = this.interactInput.bind(this);
+		this.enterHandler = this.enterHandler.bind(this);
 	}
 
 	interactInput(e) {
@@ -29,6 +30,10 @@ class SidebarHeader extends Component {
 		}
 	}
 
+	enterHandler(e) {
+		if (e.which == 13) e.target.blur();
+	}
+
 	render() {
 		return (
 			<div className='sidebar-header'>
@@ -38,6 +43,7 @@ class SidebarHeader extends Component {
 						contentEditable="true"
 						suppressContentEditableWarning="true"
 						onBlur={this.props.onTitleChange}
+						onKeyDown={this.enterHandler}
 					>
 						{this.props.tasksList[this.props.currentTask].title}
 					</div>
@@ -51,6 +57,7 @@ class SidebarHeader extends Component {
 								index={index}
 								func={this.props.deleteStep}
 								onTaskStepChange={this.props.onTaskStepChange}
+								enterHandler={this.enterHandler}
 							/>
 						))
 					}

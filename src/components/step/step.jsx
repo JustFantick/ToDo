@@ -38,6 +38,7 @@ class Step extends Component {
 					suppressContentEditableWarning="true"
 					onFocus={this.handleFocus}
 					onBlur={this.props.onTaskStepChange}
+					onKeyDown={this.props.enterHandler}
 				>
 					{this.props.text}
 				</div>

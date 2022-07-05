@@ -7,9 +7,6 @@ class AddFile extends Component {
 
 		this.dragStartHandler = this.dragStartHandler.bind(this);
 		this.dragLeaveHandler = this.dragLeaveHandler.bind(this);
-		this.onDropHandler = this.onDropHandler.bind(this);
-		this.deleteFile = this.deleteFile.bind(this);
-		this.state = { chosenFiles: [] }
 	}
 
 	dragStartHandler(e) {
@@ -21,25 +18,6 @@ class AddFile extends Component {
 		e.preventDefault();
 		document.querySelector('.add-file').classList.remove('active');
 	}
-	onDropHandler(e) {
-		e.preventDefault();
-		let files = [...e.dataTransfer.files];
-		let temp = this.state.chosenFiles;
-		files.forEach(file => temp.push(file));
-		this.setState({ chosenFiles: temp });
-	}
-	deleteFile(e) {
-		let fileName = e.target.closest('.chosen-file').querySelector('.chosen-file__name').textContent;
-		let temp = this.state.chosenFiles;
-
-		temp.forEach(file => {
-			if (file.name === fileName) {
-				temp.splice(temp.indexOf(file), 1);
-			}
-		})
-
-		this.setState({ chosenFiles: temp });
-	}
 
 	render() {
 		return (
@@ -48,7 +26,7 @@ class AddFile extends Component {
 					onDragStart={this.dragStartHandler}
 					onDragLeave={this.dragLeaveHandler}
 					onDragOver={this.dragStartHandler}
-					onDrop={this.onDropHandler}
+					onDrop={this.props.onDropHandler}
 				>
 					<label className='add-file__label' htmlFor='file'>
 						Press or drop file here
@@ -57,8 +35,10 @@ class AddFile extends Component {
 				</div>
 				<ul className='add-file__chosen'>
 					{
-						this.state.chosenFiles.map((file, index) => (
-							<ChosenFile fileName={file.name} key={index} func={this.deleteFile} />
+						this.props.chosenFiles.map((file, index) => (
+							<ChosenFile index={index} key={index}
+								fileHref={this.props.filesURL[index]}
+								fileName={file.name} func={this.props.deleteFile} />
 						))
 					}
 				</ul>

@@ -13,6 +13,9 @@ class App extends Component {
 		this.onTaskStepChange = this.onTaskStepChange.bind(this);
 		this.chooseTask = this.chooseTask.bind(this);
 
+		this.deleteFile = this.deleteFile.bind(this);
+		this.onDropHandler = this.onDropHandler.bind(this);
+
 		this.state = {
 			tasks:
 				[{
@@ -26,6 +29,8 @@ class App extends Component {
 					files: [],
 				}],
 			taskIndex: 0,
+			chosenFiles: [],
+			filesURL: [],
 		}
 	}
 
@@ -114,6 +119,36 @@ class App extends Component {
 		}
 	}
 
+	deleteFile(e) {
+		if (e.target.closest('.delete-step')) {
+			let temp = this.state.chosenFiles;
+
+			let index = e.target.closest('.chosen-file').getAttribute('index');
+
+			temp.splice(index, 1);
+
+			this.setState({ chosenFiles: temp });
+		}
+	}
+	onDropHandler(e) {
+		e.preventDefault();
+		let files = [...e.dataTransfer.files];
+		let temp = this.state.chosenFiles;
+		let tempURL = this.state.filesURL;
+
+		files.forEach(file => {
+			temp.push(file);
+
+			let fileURL = URL.createObjectURL(file);
+			tempURL.push(fileURL);
+		});
+
+		this.setState({
+			chosenFiles: temp,
+			filesURL: tempURL,
+		});
+	}
+
 	render() {
 		return (
 			<div className="wrapper" style={{ backgroundImage: `url(${background})` }}>
@@ -128,6 +163,11 @@ class App extends Component {
 					onTaskStepChange={this.onTaskStepChange}
 					addStep={this.addStep}
 					deleteStep={this.deleteStep}
+
+					deleteFile={this.deleteFile}
+					onDropHandler={this.onDropHandler}
+					chosenFiles={this.state.chosenFiles}
+					filesURL={this.state.filesURL}
 				/>
 			</div>
 		);

@@ -4,11 +4,11 @@ import './chosen-file.less'
 
 export default function ChosenFile(props) {
 	return (
-		<li className='chosen-file' onClick={props.func}>
+		<li className='chosen-file' onClick={props.func} index={props.index}>
 			<DeleteStep pc={23} mb={19} />
-			<p className='chosen-file__name'>
+			<a className='chosen-file__name' href={props.fileHref} download>
 				{props.fileName}
-			</p>
+			</a>
 		</li>
 	)
 }
