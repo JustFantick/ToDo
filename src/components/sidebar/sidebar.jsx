@@ -18,13 +18,19 @@ class Sidebar extends Component {
 					<AddFile deleteFile={this.props.deleteFile}
 						onDropHandler={this.props.onDropHandler}
 						chosenFiles={this.props.chosenFiles}
-						filesURL={this.props.filesURL} />
+						filesURL={this.props.filesURL}
+					/>
 
 				</div>
 
 				<div className='sidebar__bottom'>
-					<div className='edditing-time'>Last edit: 12:35</div>
-					<div className='delete icon-bin'></div>
+					<div className='edditing-time'>
+						Last edit: {
+							this.props.tasksList[this.props.currentTask] ?
+								this.props.tasksList[this.props.currentTask].lastEdit : ''
+						}
+					</div>
+					<div onClick={this.props.removeTask} className='delete icon-bin'></div>
 				</div>
 
 			</aside>

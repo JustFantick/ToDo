@@ -8,10 +8,14 @@ class App extends Component {
 		super(props)
 		this.addStep = this.addStep.bind(this);
 		this.deleteStep = this.deleteStep.bind(this);
+
 		this.addTask = this.addTask.bind(this);
+		this.removeTask = this.removeTask.bind(this);
+		this.chooseTask = this.chooseTask.bind(this);
+
 		this.onTaskTitleChange = this.onTaskTitleChange.bind(this);
 		this.onTaskStepChange = this.onTaskStepChange.bind(this);
-		this.chooseTask = this.chooseTask.bind(this);
+		this.updateEditingTime = this.updateEditingTime.bind(this);
 
 		this.deleteFile = this.deleteFile.bind(this);
 		this.onDropHandler = this.onDropHandler.bind(this);
@@ -22,16 +26,36 @@ class App extends Component {
 					title: 'Test task',
 					steps: ['1', '2', '2'],
 					files: [],
+					lastEdit: new Date().toLocaleString('ru', {
+						hour: 'numeric',
+						minute: 'numeric',
+					}),
 				},
 				{
-					title: 'Second task',
+					title: 'Second test task',
 					steps: [],
 					files: [],
+					lastEdit: new Date().toLocaleString('ru', {
+						hour: 'numeric',
+						minute: 'numeric',
+					}),
 				}],
 			taskIndex: 0,
 			chosenFiles: [],
 			filesURL: [],
 		}
+	}
+
+	updateEditingTime() {
+		let temp = this.state.tasks;
+		temp[this.state.taskIndex].lastEdit = new Date().toLocaleString('ru', {
+			hour: 'numeric',
+			minute: 'numeric',
+		});
+
+		this.setState({
+			tasks: temp
+		})
 	}
 
 	addStep(e) {
@@ -45,6 +69,8 @@ class App extends Component {
 			this.setState({ tasks: temp });
 
 			document.querySelector('.add-step__title').value = '';
+
+			this.updateEditingTime();
 		}
 	}
 
@@ -59,7 +85,8 @@ class App extends Component {
 
 			temp[this.state.taskIndex].steps = newSteps;
 
-			this.setState({ tasks: temp })
+			this.setState({ tasks: temp });
+			this.updateEditingTime();
 		}
 	}
 
@@ -70,6 +97,10 @@ class App extends Component {
 				title: document.querySelector('.add-task__title').value,
 				steps: [],
 				files: [],
+				lastEdit: new Date().toLocaleString('ru', {
+					hour: 'numeric',
+					minute: 'numeric',
+				}),
 			}
 			temp.push(newTask);
 
@@ -83,6 +114,7 @@ class App extends Component {
 		let temp = this.state.tasks;
 		temp[this.state.taskIndex].title = e.target.textContent;
 		this.setState({ tasks: temp });
+		this.updateEditingTime();
 	}
 
 	onTaskStepChange(e) {
@@ -90,6 +122,7 @@ class App extends Component {
 		let currentStepIndex = e.target.closest('.step').getAttribute('index');
 		temp[this.state.taskIndex].steps[currentStepIndex] = e.target.textContent;
 		this.setState({ tasks: temp });
+		this.updateEditingTime();
 	}
 
 	chooseTask(e) {
@@ -128,8 +161,10 @@ class App extends Component {
 			temp.splice(index, 1);
 
 			this.setState({ chosenFiles: temp });
+			this.updateEditingTime();
 		}
 	}
+
 	onDropHandler(e) {
 		e.preventDefault();
 		let files = [...e.dataTransfer.files];
@@ -147,6 +182,18 @@ class App extends Component {
 			chosenFiles: temp,
 			filesURL: tempURL,
 		});
+		this.updateEditingTime();
+	}
+
+	removeTask() {
+		let temp = this.state.tasks;
+		temp.splice(this.state.taskIndex, 1);
+
+		document.querySelector('.wrapper').classList.remove('active');
+
+		this.setState({
+			tasks: temp
+		})
 	}
 
 	render() {
@@ -168,6 +215,7 @@ class App extends Component {
 					onDropHandler={this.onDropHandler}
 					chosenFiles={this.state.chosenFiles}
 					filesURL={this.state.filesURL}
+					removeTask={this.removeTask}
 				/>
 			</div>
 		);

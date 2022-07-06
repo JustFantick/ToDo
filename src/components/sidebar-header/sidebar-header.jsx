@@ -45,21 +45,25 @@ class SidebarHeader extends Component {
 						onBlur={this.props.onTitleChange}
 						onKeyDown={this.enterHandler}
 					>
-						{this.props.tasksList[this.props.currentTask].title}
+						{
+							this.props.tasksList[this.props.currentTask] ?
+								this.props.tasksList[this.props.currentTask].title : ''
+						}
 					</div>
 				</div>
 				<ul className='steps-list'>
 					{
-						this.props.tasksList[this.props.currentTask].steps.map((step, index) => (
-							<Step
-								key={index}
-								text={step}
-								index={index}
-								func={this.props.deleteStep}
-								onTaskStepChange={this.props.onTaskStepChange}
-								enterHandler={this.enterHandler}
-							/>
-						))
+						this.props.tasksList[this.props.currentTask] ?
+							this.props.tasksList[this.props.currentTask].steps.map((step, index) => (
+								<Step
+									key={index}
+									text={step}
+									index={index}
+									func={this.props.deleteStep}
+									onTaskStepChange={this.props.onTaskStepChange}
+									enterHandler={this.enterHandler}
+								/>
+							)) : ''
 					}
 				</ul>
 
