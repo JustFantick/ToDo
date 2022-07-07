@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import background from "../img/bg1.jpg"
 import Main from "./main/main.jsx";
 import Sidebar from "./sidebar/sidebar.jsx";
+import Popup from './popup/popup.jsx';
 
 class App extends Component {
 	constructor(props) {
@@ -217,6 +218,9 @@ class App extends Component {
 					filesURL={this.state.filesURL}
 					removeTask={this.removeTask}
 				/>
+
+				<Popup tasksList={this.state.tasks}
+					currentTask={this.state.taskIndex} />
 			</div>
 		);
 	}

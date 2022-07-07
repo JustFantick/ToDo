@@ -1,0 +1,68 @@
+.popup {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	height: 100vh;
+	width: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 0 15px;
+
+	&__body {
+		background-color: @bg-elemet-color;
+		border-radius: 10px;
+		padding: #adapt(30, 13)[@value];
+
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr 1fr;
+
+		justify-items: center;
+		align-items: center;
+		row-gap: #adapt(35, 20)[@value];
+	}
+
+	&__question {
+		color: whitesmoke;
+		font-size: #adapt(31, 24)[@value];
+		text-align: center;
+
+		grid-column-start: 1;
+		grid-column-end: 3;
+	}
+
+
+	&__cancel-btn,
+	&__right-btn {
+		font-size: #adapt(21, 14)[@value];
+		font-family: 'Roboto';
+		letter-spacing: 2px;
+		padding: #adapt(15, 10)[@value] #adapt(30, 20)[@value];
+		border-radius: 5px;
+		color: whitesmoke;
+
+		transition: all 0.3s ease-in;
+	}
+
+	&__right-btn {
+		background-color: red;
+		transform: translate(15%, 0);
+
+		&:hover {
+			background-color: rgb(117, 0, 0);
+		}
+	}
+
+	&__cancel-btn {
+		background-color: rgb(93, 93, 93);
+		transform: translate(-15%, 0);
+
+		&:hover {
+			background-color: rgb(71, 71, 71);
+		}
+	}
+}
