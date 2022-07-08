@@ -129,7 +129,7 @@ class App extends Component {
 	chooseTask(e) {
 		let targetParent = e.target.closest('.task');
 
-		if (!e.target.closest('.status') && !e.target.closest('.task__star')) {
+		if (!e.target.closest('.status') && !e.target.closest('.task__star') && !targetParent.classList.contains('active')) {
 			let targetIndex = targetParent.getAttribute('index');
 
 			this.setState({ taskIndex: targetIndex })
@@ -149,6 +149,11 @@ class App extends Component {
 					});
 					document.querySelector('.main').removeEventListener('click', function (e) { })
 				}
+			});
+		} else if (targetParent.classList.contains('active')) {
+			document.querySelector('.wrapper').classList.remove('active');
+			document.querySelectorAll('.task').forEach((task) => {
+				task.classList.remove('active');
 			});
 		}
 	}
@@ -195,6 +200,8 @@ class App extends Component {
 		this.setState({
 			tasks: temp
 		})
+
+		document.querySelector('.popup').classList.remove('active');
 	}
 
 	render() {
@@ -216,11 +223,11 @@ class App extends Component {
 					onDropHandler={this.onDropHandler}
 					chosenFiles={this.state.chosenFiles}
 					filesURL={this.state.filesURL}
-					removeTask={this.removeTask}
 				/>
 
 				<Popup tasksList={this.state.tasks}
-					currentTask={this.state.taskIndex} />
+					currentTask={this.state.taskIndex}
+					removeTask={this.removeTask} />
 			</div>
 		);
 	}

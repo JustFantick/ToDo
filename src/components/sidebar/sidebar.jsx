@@ -3,6 +3,15 @@ import SidebarHeader from '../sidebar-header/sidebar-header.jsx';
 import AddFile from '../add-file/add-file.jsx';
 
 class Sidebar extends Component {
+	constructor(props) {
+		super(props)
+		this.openPopup = this.openPopup.bind(this);
+	}
+
+	openPopup() {
+		document.querySelector('.popup').classList.add('active');
+	}
+
 	render() {
 		return (
 			<aside className="sidebar">
@@ -30,7 +39,7 @@ class Sidebar extends Component {
 								this.props.tasksList[this.props.currentTask].lastEdit : ''
 						}
 					</div>
-					<div onClick={this.props.removeTask} className='delete icon-bin'></div>
+					<div onClick={this.openPopup} className='delete icon-bin'></div>
 				</div>
 
 			</aside>

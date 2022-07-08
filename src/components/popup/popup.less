@@ -13,6 +13,11 @@
 	padding: 0 15px;
 
 	&__body {
+		transition: all 0.5s ease-in 0.4s;
+
+		transform: translateX(-50%);
+		opacity: 0;
+
 		background-color: @bg-elemet-color;
 		border-radius: 10px;
 		padding: #adapt(30, 13)[@value];
@@ -20,7 +25,6 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		grid-template-rows: 1fr 1fr;
-
 		justify-items: center;
 		align-items: center;
 		row-gap: #adapt(35, 20)[@value];
@@ -63,6 +67,20 @@
 
 		&:hover {
 			background-color: rgb(71, 71, 71);
+		}
+	}
+
+	visibility: hidden;
+	opacity: 0;
+	transition: all 0.3s ease-in;
+
+	&.active {
+		visibility: visible;
+		opacity: 1;
+
+		.popup__body {
+			opacity: 1;
+			transform: translateX(0);
 		}
 	}
 }
