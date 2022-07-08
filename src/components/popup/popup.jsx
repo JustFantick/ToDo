@@ -19,7 +19,10 @@ class Popup extends Component {
 			<div className='popup' onClick={this.outBodyClick}>
 				<div className="popup__body">
 					<div className='popup__question'>
-						You want to delete the "{this.props.tasksList[this.props.currentTask].title}", right?
+						You want to delete the '{
+							this.props.tasksList[this.props.currentTask] ?
+								this.props.tasksList[this.props.currentTask].title : ''
+						}', right?
 					</div>
 					<button onClick={this.props.removeTask}
 						className='popup__right-btn'>Delete</button>
