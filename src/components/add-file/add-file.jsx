@@ -7,6 +7,7 @@ class AddFile extends Component {
 
 		this.dragStartHandler = this.dragStartHandler.bind(this);
 		this.dragLeaveHandler = this.dragLeaveHandler.bind(this);
+		this.showChosenFiles = this.showChosenFiles.bind(this);
 	}
 
 	dragStartHandler(e) {
@@ -17,6 +18,16 @@ class AddFile extends Component {
 	dragLeaveHandler(e) {
 		e.preventDefault();
 		document.querySelector('.add-file').classList.remove('active');
+	}
+
+	componentDidMount() {
+		let input = document.querySelector('.add-file__input');
+		console.log(input.files);
+	}
+
+	showChosenFiles() {
+		let input = document.querySelector('.add-file__input');
+		console.log(input.files);
 	}
 
 	render() {
@@ -31,15 +42,17 @@ class AddFile extends Component {
 					<label className='add-file__label' htmlFor='file'>
 						Press or drop file here
 					</label>
-					<input className='add-file__input' type={'file'} name={'file'} />
+					<input onChange={this.props.addFile}
+						className='add-file__input' type={'file'} name={'file'} />
 				</div>
 				<ul className='add-file__chosen'>
 					{
-						this.props.chosenFiles.map((file, index) => (
-							<ChosenFile index={index} key={index}
-								fileHref={this.props.filesURL[index]}
-								fileName={file.name} func={this.props.deleteFile} />
-						))
+						this.props.tasksList[this.props.currentTask] ?
+							this.props.tasksList[this.props.currentTask].files.map((file, index) => (
+								<ChosenFile index={index} key={index}
+									fileHref={this.props.tasksList[this.props.currentTask].filesURL[index]}
+									fileName={file.name} func={this.props.deleteFile} />
+							)) : ''
 					}
 				</ul>
 			</div>

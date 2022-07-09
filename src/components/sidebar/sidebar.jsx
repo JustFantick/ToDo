@@ -26,8 +26,11 @@ class Sidebar extends Component {
 					/>
 					<AddFile deleteFile={this.props.deleteFile}
 						onDropHandler={this.props.onDropHandler}
-						chosenFiles={this.props.chosenFiles}
-						filesURL={this.props.filesURL}
+						addFile={this.props.addFile}
+						tasksList={this.props.tasksList}
+						currentTask={this.props.currentTask}
+					// chosenFiles={this.props.chosenFiles}
+					// filesURL={this.props.filesURL}
 					/>
 
 				</div>

@@ -19,6 +19,7 @@ class App extends Component {
 		this.updateEditingTime = this.updateEditingTime.bind(this);
 
 		this.deleteFile = this.deleteFile.bind(this);
+		this.addFile = this.addFile.bind(this);
 		this.onDropHandler = this.onDropHandler.bind(this);
 
 		this.state = {
@@ -26,24 +27,24 @@ class App extends Component {
 				[{
 					title: 'Test task',
 					steps: ['1', '2', '2'],
-					files: [],
 					lastEdit: new Date().toLocaleString('ru', {
 						hour: 'numeric',
 						minute: 'numeric',
 					}),
+					files: [],
+					filesURL: [],
 				},
 				{
 					title: 'Second test task',
 					steps: [],
-					files: [],
 					lastEdit: new Date().toLocaleString('ru', {
 						hour: 'numeric',
 						minute: 'numeric',
 					}),
+					files: [],
+					filesURL: [],
 				}],
 			taskIndex: 0,
-			chosenFiles: [],
-			filesURL: [],
 		}
 	}
 
@@ -97,16 +98,16 @@ class App extends Component {
 			let newTask = {
 				title: document.querySelector('.add-task__title').value,
 				steps: [],
-				files: [],
 				lastEdit: new Date().toLocaleString('ru', {
 					hour: 'numeric',
 					minute: 'numeric',
 				}),
+				files: [],
+				filesURL: [],
 			}
 			temp.push(newTask);
 
 			this.setState({ tasks: temp });
-
 			document.querySelector('.add-task__title').value = '';
 		}
 	}
@@ -158,39 +159,6 @@ class App extends Component {
 		}
 	}
 
-	deleteFile(e) {
-		if (e.target.closest('.delete-step')) {
-			let temp = this.state.chosenFiles;
-
-			let index = e.target.closest('.chosen-file').getAttribute('index');
-
-			temp.splice(index, 1);
-
-			this.setState({ chosenFiles: temp });
-			this.updateEditingTime();
-		}
-	}
-
-	onDropHandler(e) {
-		e.preventDefault();
-		let files = [...e.dataTransfer.files];
-		let temp = this.state.chosenFiles;
-		let tempURL = this.state.filesURL;
-
-		files.forEach(file => {
-			temp.push(file);
-
-			let fileURL = URL.createObjectURL(file);
-			tempURL.push(fileURL);
-		});
-
-		this.setState({
-			chosenFiles: temp,
-			filesURL: tempURL,
-		});
-		this.updateEditingTime();
-	}
-
 	removeTask() {
 		let temp = this.state.tasks;
 		temp.splice(this.state.taskIndex, 1);
@@ -202,6 +170,49 @@ class App extends Component {
 		})
 
 		document.querySelector('.popup').classList.remove('active');
+	}
+
+	deleteFile(e) {
+		if (e.target.closest('.delete-step')) {
+			let temp = this.state.tasks;
+
+			let index = e.target.closest('.chosen-file').getAttribute('index');
+
+			temp[this.state.taskIndex].files.splice(index, 1);
+			temp[this.state.taskIndex].filesURL.splice(index, 1);
+
+			this.setState({ tasks: temp });
+			this.updateEditingTime();
+		}
+	}
+
+	addFile() {
+		let input = document.querySelector('.add-file__input');
+
+		let temp = this.state.tasks;
+		temp[this.state.taskIndex].files.push(input.files[0]);
+
+		let fileURL = URL.createObjectURL(input.files[0]);
+		temp[this.state.taskIndex].filesURL.push(fileURL);
+
+		this.setState({ tasks: temp });
+		this.updateEditingTime();
+	}
+
+	onDropHandler(e) {
+		e.preventDefault();
+		let files = [...e.dataTransfer.files];
+		let temp = this.state.tasks;
+
+		files.forEach(file => {
+			temp[this.state.taskIndex].files.push(file);
+
+			let fileURL = URL.createObjectURL(file);
+			temp[this.state.taskIndex].filesURL.push(fileURL);
+		});
+
+		this.setState({ tasks: temp });
+		this.updateEditingTime();
 	}
 
 	render() {
@@ -221,8 +232,9 @@ class App extends Component {
 
 					deleteFile={this.deleteFile}
 					onDropHandler={this.onDropHandler}
-					chosenFiles={this.state.chosenFiles}
-					filesURL={this.state.filesURL}
+					addFile={this.addFile}
+				// chosenFiles={this.state.chosenFiles}
+				// filesURL={this.state.filesURL}
 				/>
 
 				<Popup tasksList={this.state.tasks}
