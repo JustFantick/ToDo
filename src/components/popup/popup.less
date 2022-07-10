@@ -13,7 +13,7 @@
 	padding: 0 15px;
 
 	&__body {
-		transition: all 0.5s ease-in 0.4s;
+		transition: all 0.15s linear; //onClosePopup
 
 		transform: translateX(-50%);
 		opacity: 0;
@@ -72,15 +72,17 @@
 
 	visibility: hidden;
 	opacity: 0;
-	transition: all 0.3s ease-in;
+	transition: all 0.3s linear 0.15s; //onClosePopup
 
 	&.active {
 		visibility: visible;
 		opacity: 1;
+		transition: all 0.25s linear; //onOpenPopup
 
 		.popup__body {
 			opacity: 1;
 			transform: translateX(0);
+			transition: all 0.15s linear 0.15s; //onOpenPopup
 		}
 	}
 }
