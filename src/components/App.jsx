@@ -164,12 +164,12 @@ class App extends Component {
 		temp.splice(this.state.taskIndex, 1);
 
 		document.querySelector('.wrapper').classList.remove('active');
-
-		this.setState({
-			tasks: temp
-		})
-
 		document.querySelector('.popup').classList.remove('active');
+		document.querySelectorAll('.task').forEach((task) => {
+			task.classList.remove('active');
+		});
+
+		this.setState({ tasks: temp })
 	}
 
 	deleteFile(e) {
