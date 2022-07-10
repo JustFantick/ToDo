@@ -29,8 +29,6 @@ class Sidebar extends Component {
 						addFile={this.props.addFile}
 						tasksList={this.props.tasksList}
 						currentTask={this.props.currentTask}
-					// chosenFiles={this.props.chosenFiles}
-					// filesURL={this.props.filesURL}
 					/>
 
 				</div>

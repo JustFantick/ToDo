@@ -30,8 +30,8 @@ class Step extends Component {
 		return (
 			<li className='step' onClick={this.props.func} index={this.props.index}>
 				<div className='step__btns'>
-					<Status pc={23} mb={19} />
-					<DeleteStep pc={23} mb={19} />
+					<Status pc={21} mb={17} />
+					<DeleteStep pc={21} mb={17} />
 				</div>
 				<div className="step__title"
 					contentEditable="true"

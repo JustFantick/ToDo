@@ -8,5 +8,5 @@ export default function Status(props) {
 		width: 'calc(' + props.mb + 'px' + ' + (' + props.pc + ' - ' + props.mb + ') * ((100vw - 320px) / (1280 - 320)))',
 		height: 'calc(' + props.mb + 'px' + ' + (' + props.pc + ' - ' + props.mb + ') * ((100vw - 320px) / (1280 - 320)))'
 	}
-	return <div onClick={statusChange} className="status" style={statusSize}></div>
+	return <div onClick={statusChange} className="status icon-tick" style={statusSize}></div>
 }

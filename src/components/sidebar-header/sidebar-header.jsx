@@ -38,7 +38,7 @@ class SidebarHeader extends Component {
 		return (
 			<div className='sidebar-header'>
 				<div className="sidebar-task">
-					<Status mb={22} pc={28} />
+					<Status mb={20} pc={25} />
 					<div className="sidebar-task__title"
 						contentEditable="true"
 						suppressContentEditableWarning="true"
