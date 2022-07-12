@@ -6,9 +6,11 @@ class Step extends Component {
 	render() {
 		return (
 			<li className='step' onClick={this.props.func} index={this.props.index}>
-				<Status pc={21} mb={17} />
+				<Status status={this.props.stepStatus} pc={21} mb={17}
+					statusChangeHandler={this.props.stepStatusChangeHandler} />
 
-				<div className="step__title"
+				<div
+					className={this.props.stepStatus ? "step__title done" : "step__title"}
 					contentEditable="true"
 					suppressContentEditableWarning="true"
 					onBlur={this.props.onTaskStepChange}

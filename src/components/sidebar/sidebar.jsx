@@ -25,6 +25,7 @@ class Sidebar extends Component {
 						onTaskStepChange={this.props.onTaskStepChange}
 
 						taskStatusChangeHandler={this.props.taskStatusChangeHandler}
+						stepStatusChangeHandler={this.props.stepStatusChangeHandler}
 					/>
 					<AddFile deleteFile={this.props.deleteFile}
 						onDropHandler={this.props.onDropHandler}

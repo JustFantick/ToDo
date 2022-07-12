@@ -10,6 +10,12 @@
 		padding-right: 5px;
 		color: rgb(122, 125, 132);
 		font-size: #adapt(24, 16)[@value];
+		transition: all 0.3s ease-in;
+
+		&.done {
+			text-decoration: line-through;
+			color: gray;
+		}
 	}
 
 	div:first-child,

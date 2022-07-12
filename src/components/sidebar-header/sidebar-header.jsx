@@ -38,8 +38,8 @@ class SidebarHeader extends Component {
 		return (
 			<div className='sidebar-header'>
 				<div className="sidebar-task">
-					<Status mb={20} pc={25} taskStatus={this.props.tasksList[this.props.currentTask].taskStatusDone}
-						taskStatusChangeHandler={this.props.taskStatusChangeHandler} />
+					<Status mb={20} pc={25} status={this.props.tasksList[this.props.currentTask].taskStatusDone}
+						statusChangeHandler={this.props.taskStatusChangeHandler} />
 					<div className={this.props.tasksList[this.props.currentTask].taskStatusDone ? "sidebar-task__title done" : "sidebar-task__title"}
 						contentEditable="true"
 						suppressContentEditableWarning="true"
@@ -58,8 +58,10 @@ class SidebarHeader extends Component {
 							this.props.tasksList[this.props.currentTask].steps.map((step, index) => (
 								<Step
 									key={index}
-									text={step}
+									text={step.title}
 									index={index}
+									stepStatus={step.stepDone}
+									stepStatusChangeHandler={this.props.stepStatusChangeHandler}
 									func={this.props.deleteStep}
 									onTaskStepChange={this.props.onTaskStepChange}
 									enterHandler={this.enterHandler}

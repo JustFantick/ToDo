@@ -9,6 +9,8 @@ class App extends Component {
 		super(props)
 		this.addStep = this.addStep.bind(this);
 		this.deleteStep = this.deleteStep.bind(this);
+		this.stepStatusChangeHandler = this.stepStatusChangeHandler.bind(this);
+
 
 		this.addTask = this.addTask.bind(this);
 		this.removeTask = this.removeTask.bind(this);
@@ -28,7 +30,7 @@ class App extends Component {
 				[{
 					title: 'Test task',
 					taskStatusDone: false,
-					steps: ['1', '2', '2'],
+					steps: [{ stepDone: false, title: '1' }, { stepDone: false, title: '2' }],
 					lastEdit: new Date().toLocaleString('ru', {
 						hour: 'numeric',
 						minute: 'numeric',
@@ -61,6 +63,15 @@ class App extends Component {
 		temp[index].taskStatusDone = !prevStatus;
 		this.setState({ tasks: temp });
 	}
+	stepStatusChangeHandler(e) {
+		let temp = this.state.tasks;
+		let index = e.target.closest('.step').getAttribute('index');
+
+		let prevStatus = temp[this.state.taskIndex].steps[index].stepDone;
+
+		temp[this.state.taskIndex].steps[index].stepDone = !prevStatus;
+		this.setState({ tasks: temp });
+	}
 
 	updateEditingTime() {
 		let temp = this.state.tasks;
@@ -79,14 +90,16 @@ class App extends Component {
 			let temp = this.state.tasks;
 			let newSteps = this.state.tasks[this.state.taskIndex].steps;
 
-			newSteps.push(document.querySelector('.add-step__title').value);
+			newSteps.push({
+				stepDone: false,
+				title: document.querySelector('.add-step__title').value
+			});
 			temp[this.state.taskIndex].steps = newSteps;
 
 			this.setState({ tasks: temp });
+			this.updateEditingTime();
 
 			document.querySelector('.add-step__title').value = '';
-
-			this.updateEditingTime();
 		}
 	}
 
@@ -95,9 +108,9 @@ class App extends Component {
 			let temp = this.state.tasks;
 
 			let newSteps = this.state.tasks[this.state.taskIndex].steps;
-			let value =
-				e.target.closest('.step').querySelector('.step__title').innerText;
-			newSteps.splice(temp.indexOf(value), 1);
+			let index = e.target.closest('.step').getAttribute('index');
+
+			newSteps.splice(index, 1);
 
 			temp[this.state.taskIndex].steps = newSteps;
 
@@ -137,7 +150,7 @@ class App extends Component {
 	onTaskStepChange(e) {
 		let temp = this.state.tasks;
 		let currentStepIndex = e.target.closest('.step').getAttribute('index');
-		temp[this.state.taskIndex].steps[currentStepIndex] = e.target.textContent;
+		temp[this.state.taskIndex].steps[currentStepIndex].title = e.target.textContent;
 		this.setState({ tasks: temp });
 		this.updateEditingTime();
 	}
@@ -249,6 +262,7 @@ class App extends Component {
 
 					addStep={this.addStep}
 					deleteStep={this.deleteStep}
+					stepStatusChangeHandler={this.stepStatusChangeHandler}
 
 					deleteFile={this.deleteFile}
 					onDropHandler={this.onDropHandler}

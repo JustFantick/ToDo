@@ -6,8 +6,8 @@ function Task(props) {
 
 	return (
 		<div className='task' onClick={props.chooseTask} index={props.index}>
-			<Status pc={25} mb={20} taskStatus={props.taskStatus}
-				taskStatusChangeHandler={props.taskStatusChangeHandler} />
+			<Status pc={25} mb={20} status={props.taskStatus}
+				statusChangeHandler={props.taskStatusChangeHandler} />
 
 			<div className={props.taskStatus ? "task__title done" : "task__title"}> {props.title} </div>
 
