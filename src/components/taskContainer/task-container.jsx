@@ -8,7 +8,9 @@ class TaskContainer extends Component {
 				<div className='tasks-container__body'>
 					{
 						this.props.tasks.map((task, index) => (
-							<Task key={index} index={index} title={task.title} chooseTask={this.props.chooseTask} />
+							<Task key={index} index={index} title={task.title} chooseTask={this.props.chooseTask}
+								taskStatusChangeHandler={this.props.taskStatusChangeHandler}
+								taskStatus={this.props.tasks[index].taskStatusDone} />
 						))
 					}
 				</div>

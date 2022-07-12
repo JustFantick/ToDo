@@ -13,6 +13,7 @@ class App extends Component {
 		this.addTask = this.addTask.bind(this);
 		this.removeTask = this.removeTask.bind(this);
 		this.chooseTask = this.chooseTask.bind(this);
+		this.taskStatusChangeHandler = this.taskStatusChangeHandler.bind(this);
 
 		this.onTaskTitleChange = this.onTaskTitleChange.bind(this);
 		this.onTaskStepChange = this.onTaskStepChange.bind(this);
@@ -26,6 +27,7 @@ class App extends Component {
 			tasks:
 				[{
 					title: 'Test task',
+					taskStatusDone: false,
 					steps: ['1', '2', '2'],
 					lastEdit: new Date().toLocaleString('ru', {
 						hour: 'numeric',
@@ -36,6 +38,7 @@ class App extends Component {
 				},
 				{
 					title: 'Second test task',
+					taskStatusDone: false,
 					steps: [],
 					lastEdit: new Date().toLocaleString('ru', {
 						hour: 'numeric',
@@ -46,6 +49,17 @@ class App extends Component {
 				}],
 			taskIndex: 0,
 		}
+	}
+
+	taskStatusChangeHandler(e) {
+		let temp = this.state.tasks;
+		let index = e.target.closest('.task') ?
+			e.target.closest('.task').getAttribute('index') : this.state.taskIndex;
+
+		let prevStatus = temp[index].taskStatusDone;
+
+		temp[index].taskStatusDone = !prevStatus;
+		this.setState({ tasks: temp });
 	}
 
 	updateEditingTime() {
@@ -97,6 +111,7 @@ class App extends Component {
 			let temp = this.state.tasks;
 			let newTask = {
 				title: document.querySelector('.add-task__title').value,
+				taskStatusDone: false,
 				steps: [],
 				lastEdit: new Date().toLocaleString('ru', {
 					hour: 'numeric',
@@ -220,21 +235,24 @@ class App extends Component {
 			<div className="wrapper" style={{ backgroundImage: `url(${background})` }}>
 				<Main tasksList={this.state.tasks}
 					addTask={this.addTask}
-					chooseTask={this.chooseTask} />
+					chooseTask={this.chooseTask}
+					taskStatusChangeHandler={this.taskStatusChangeHandler}
+				/>
 
 				<Sidebar
 					tasksList={this.state.tasks}
 					currentTask={this.state.taskIndex}
 					onTitleChange={this.onTaskTitleChange}
 					onTaskStepChange={this.onTaskStepChange}
+
+					taskStatusChangeHandler={this.taskStatusChangeHandler}
+
 					addStep={this.addStep}
 					deleteStep={this.deleteStep}
 
 					deleteFile={this.deleteFile}
 					onDropHandler={this.onDropHandler}
 					addFile={this.addFile}
-				// chosenFiles={this.state.chosenFiles}
-				// filesURL={this.state.filesURL}
 				/>
 
 				<Popup tasksList={this.state.tasks}
