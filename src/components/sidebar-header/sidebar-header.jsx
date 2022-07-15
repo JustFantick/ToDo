@@ -38,9 +38,16 @@ class SidebarHeader extends Component {
 		return (
 			<div className='sidebar-header'>
 				<div className="sidebar-task">
-					<Status mb={20} pc={25} status={this.props.tasksList[this.props.currentTask].taskStatusDone}
+					<Status mb={20} pc={25}
+						status={this.props.tasksList[this.props.currentTask] ? this.props.tasksList[this.props.currentTask].taskStatusDone : false}
 						statusChangeHandler={this.props.taskStatusChangeHandler} />
-					<div className={this.props.tasksList[this.props.currentTask].taskStatusDone ? "sidebar-task__title done" : "sidebar-task__title"}
+					<div
+						className={
+							this.props.tasksList[this.props.currentTask]
+								?
+								this.props.tasksList[this.props.currentTask].taskStatusDone ? "sidebar-task__title done" : "sidebar-task__title"
+								: "sidebar-task__title"
+						}
 						contentEditable="true"
 						suppressContentEditableWarning="true"
 						onBlur={this.props.onTitleChange}
