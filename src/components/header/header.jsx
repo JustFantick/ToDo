@@ -10,7 +10,7 @@ export default function Header() {
 		<header className="header">
 			<div className="header__title">
 				<h1>Your`s day</h1>
-				<p> {new Date().toLocaleString('en-EU', options)} </p>
+				<p>{new Date().toLocaleString('en-EU', options)}</p>
 			</div>
 			<div className="settings-button">
 				<span></span>

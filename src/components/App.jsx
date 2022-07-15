@@ -7,6 +7,8 @@ import Popup from './popup/popup.jsx';
 class App extends Component {
 	constructor(props) {
 		super(props)
+		this.setTasksToLocalStorage = this.setTasksToLocalStorage.bind(this);
+
 		this.addStep = this.addStep.bind(this);
 		this.deleteStep = this.deleteStep.bind(this);
 		this.stepStatusChangeHandler = this.stepStatusChangeHandler.bind(this);
@@ -53,6 +55,53 @@ class App extends Component {
 		}
 	}
 
+	componentDidMount() {
+		//check on already created tasks, saved in LocalStorage;
+		if (localStorage.getItem('tasks')) {
+			let tasks = JSON.parse(localStorage.getItem('tasks'));
+			this.setState({ tasks: tasks });
+		}
+
+		//every next day refresh tasks
+		let timeInHeader = document.querySelector('.header__title p');
+		let currentTime = new Date().toLocaleString('en-EU', {
+			month: 'long',
+			day: 'numeric',
+			weekday: 'short',
+		});
+		if (timeInHeader.textContent !== currentTime) {
+			let templateState = [{
+				title: 'Test task',
+				taskStatusDone: false,
+				steps: [{ stepDone: false, title: '1' }, { stepDone: false, title: '2' }],
+				lastEdit: new Date().toLocaleString('ru', {
+					hour: 'numeric',
+					minute: 'numeric',
+				}),
+				files: [],
+				filesURL: [],
+			},
+			{
+				title: 'Second test task',
+				taskStatusDone: false,
+				steps: [],
+				lastEdit: new Date().toLocaleString('ru', {
+					hour: 'numeric',
+					minute: 'numeric',
+				}),
+				files: [],
+				filesURL: [],
+			}];
+			this.setState({ tasks: templateState });
+			this.setTasksToLocalStorage();
+		}
+	}
+
+	setTasksToLocalStorage() {
+		let presentTasks = this.state.tasks;
+		localStorage.setItem('tasks', JSON.stringify(presentTasks));
+	}
+
 	taskStatusChangeHandler(e) {
 		let temp = this.state.tasks;
 		let index = e.target.closest('.task') ?
@@ -62,6 +111,7 @@ class App extends Component {
 
 		temp[index].taskStatusDone = !prevStatus;
 		this.setState({ tasks: temp });
+		this.updateEditingTime();
 	}
 	stepStatusChangeHandler(e) {
 		let temp = this.state.tasks;
@@ -71,6 +121,7 @@ class App extends Component {
 
 		temp[this.state.taskIndex].steps[index].stepDone = !prevStatus;
 		this.setState({ tasks: temp });
+		this.updateEditingTime();
 	}
 
 	updateEditingTime() {
@@ -80,9 +131,8 @@ class App extends Component {
 			minute: 'numeric',
 		});
 
-		this.setState({
-			tasks: temp
-		})
+		this.setState({ tasks: temp });
+		this.setTasksToLocalStorage();//save changes
 	}
 
 	addStep(e) {
@@ -136,6 +186,7 @@ class App extends Component {
 			temp.push(newTask);
 
 			this.setState({ tasks: temp });
+			this.setTasksToLocalStorage();//save changes
 			document.querySelector('.add-task__title').value = '';
 		}
 	}
@@ -197,7 +248,8 @@ class App extends Component {
 			task.classList.remove('active');
 		});
 
-		this.setState({ tasks: temp })
+		this.setState({ tasks: temp });
+		this.setTasksToLocalStorage();//save changes
 	}
 
 	deleteFile(e) {

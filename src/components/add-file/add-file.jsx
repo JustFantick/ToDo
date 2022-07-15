@@ -22,12 +22,10 @@ class AddFile extends Component {
 
 	componentDidMount() {
 		let input = document.querySelector('.add-file__input');
-		console.log(input.files);
 	}
 
 	showChosenFiles() {
 		let input = document.querySelector('.add-file__input');
-		console.log(input.files);
 	}
 
 	render() {
