@@ -56,20 +56,17 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		//check on already created tasks, saved in LocalStorage;
-		if (localStorage.getItem('tasks')) {
-			let tasks = JSON.parse(localStorage.getItem('tasks'));
-			this.setState({ tasks: tasks });
-		}
-
-		//every next day refresh tasks
-		let timeInHeader = document.querySelector('.header__title p');
-		let currentTime = new Date().toLocaleString('en-EU', {
+		//everyday refresh tasks
+		const currentDate = new Date().toLocaleString('en-EU', {
 			month: 'long',
 			day: 'numeric',
 			weekday: 'short',
 		});
-		if (timeInHeader.textContent !== currentTime) {
+
+
+		if (!localStorage.getItem('date')) {
+			localStorage.setItem('date', JSON.stringify(currentDate));
+		} else if (JSON.parse(localStorage.getItem('date')) !== currentDate) {
 			let templateState = [{
 				title: 'Test task',
 				taskStatusDone: false,
@@ -94,6 +91,13 @@ class App extends Component {
 			}];
 			this.setState({ tasks: templateState });
 			this.setTasksToLocalStorage();
+			localStorage.setItem('date', JSON.stringify(currentDate));
+		}
+
+		//check on already created tasks, saved in LocalStorage;
+		if (localStorage.getItem('tasks')) {
+			let tasks = JSON.parse(localStorage.getItem('tasks'));
+			this.setState({ tasks: tasks });
 		}
 	}
 
