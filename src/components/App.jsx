@@ -7,7 +7,6 @@ import Popup from './popup/popup.jsx';
 class App extends Component {
 	constructor(props) {
 		super(props)
-		this.setTasksToLocalStorage = this.setTasksToLocalStorage.bind(this);
 
 		this.addStep = this.addStep.bind(this);
 		this.deleteStep = this.deleteStep.bind(this);
@@ -54,6 +53,10 @@ class App extends Component {
 			taskIndex: 0,
 		}
 	}
+	componentDidUpdate() {
+		let presentTasks = this.state.tasks;
+		localStorage.setItem('tasks', JSON.stringify(presentTasks));
+	}
 
 	componentDidMount() {
 		//everyday refresh tasks
@@ -62,7 +65,6 @@ class App extends Component {
 			day: 'numeric',
 			weekday: 'short',
 		});
-
 
 		if (!localStorage.getItem('date')) {
 			localStorage.setItem('date', JSON.stringify(currentDate));
@@ -90,7 +92,7 @@ class App extends Component {
 				filesURL: [],
 			}];
 			this.setState({ tasks: templateState });
-			this.setTasksToLocalStorage();
+			this.componentDidUpdate();
 			localStorage.setItem('date', JSON.stringify(currentDate));
 		}
 
@@ -99,11 +101,6 @@ class App extends Component {
 			let tasks = JSON.parse(localStorage.getItem('tasks'));
 			this.setState({ tasks: tasks });
 		}
-	}
-
-	setTasksToLocalStorage() {
-		let presentTasks = this.state.tasks;
-		localStorage.setItem('tasks', JSON.stringify(presentTasks));
 	}
 
 	taskStatusChangeHandler(e) {
@@ -136,7 +133,6 @@ class App extends Component {
 		});
 
 		this.setState({ tasks: temp });
-		this.setTasksToLocalStorage();//save changes
 	}
 
 	addStep(e) {
@@ -190,7 +186,6 @@ class App extends Component {
 			temp.push(newTask);
 
 			this.setState({ tasks: temp });
-			this.setTasksToLocalStorage();//save changes
 			document.querySelector('.add-task__title').value = '';
 		}
 	}
@@ -253,7 +248,6 @@ class App extends Component {
 		});
 
 		this.setState({ tasks: temp });
-		this.setTasksToLocalStorage();//save changes
 	}
 
 	deleteFile(e) {
