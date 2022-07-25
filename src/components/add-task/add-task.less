@@ -44,6 +44,32 @@
 		background-color: rgba(0, 0, 0, 0.95);
 	}
 
+	&__title {
+		padding: #adapt(20, 14)[@value] #adapt(64, 40)[@value] #adapt(20, 14)[@value] 0;
+		transition: all 0.3s ease-in;
+		flex: 1 1 auto;
+		font-size: #adapt(27, 17)[@value];
+		line-height: 1;
+		background-color: transparent;
+		color: white;
+	}
+
+	position: relative;
+
+	&__send-icon {
+		transition: all 0.3s ease-in;
+		position: absolute;
+		top: 50%;
+		right: #adapt(23, 8)[@value];
+		transform: translate(0, -50%);
+		border-radius: 5px;
+		padding: #adapt(7, 5)[@value];
+
+		visibility: hidden;
+		opacity: 0;
+		cursor: pointer;
+	}
+
 	&.focused {
 		background-color: rgba(0, 0, 0, 0.95);
 
@@ -56,15 +82,10 @@
 				transform: translate(-50%, -50%) rotate(-45deg);
 			}
 		}
-	}
 
-	&__title {
-		padding: #adapt(20, 14)[@value] #adapt(23, 13)[@value] #adapt(20, 14)[@value] 0;
-		transition: all 0.3s ease-in;
-		flex: 1 1 auto;
-		font-size: #adapt(27, 17)[@value];
-		line-height: 1;
-		background-color: transparent;
-		color: white;
+		.add-task__send-icon {
+			visibility: visible;
+			opacity: 1;
+		}
 	}
 }

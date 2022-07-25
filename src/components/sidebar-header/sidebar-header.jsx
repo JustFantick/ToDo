@@ -49,6 +49,7 @@ class SidebarHeader extends Component {
 								: "sidebar-task__title"
 						}
 						contentEditable="true"
+						tabIndex={-1}
 						suppressContentEditableWarning="true"
 						onBlur={this.props.onTitleChange}
 						onKeyDown={this.enterHandler}
@@ -79,7 +80,9 @@ class SidebarHeader extends Component {
 
 				<div className='add-step' onClick={this.interactInput}>
 					<div className="add-step__plus" ></div>
-					<input type={'text'} placeholder='Enter next task`s title' className="add-step__title" onKeyDown={this.props.addStep} />
+					<input type={'text'} placeholder='Enter next step`s title'
+						name='stepName'
+						className="add-step__title" onKeyDown={this.props.addStep} />
 				</div>
 			</div >
 		);

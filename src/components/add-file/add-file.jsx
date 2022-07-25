@@ -40,7 +40,7 @@ class AddFile extends Component {
 					<label className='add-file__label' htmlFor='file'>
 						Press or drop file here
 					</label>
-					<input onChange={this.props.addFile}
+					<input onChange={this.props.addFile} tabIndex={-1}
 						className='add-file__input' type={'file'} name={'file'} />
 				</div>
 				<ul className='add-file__chosen'>

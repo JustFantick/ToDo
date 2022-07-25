@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import background from "../img/bg1.jpg"
+import background from "../img/bg1.webp"
 import Main from "./main/main.jsx";
 import Sidebar from "./sidebar/sidebar.jsx";
 import Popup from './popup/popup.jsx';
@@ -169,8 +169,8 @@ class App extends Component {
 		}
 	}
 
-	addTask(e) {
-		if (e.which === 13 && document.querySelector('.add-task__title').value !== '') {
+	addTask() {
+		if (document.querySelector('.add-task__title').value !== '') {
 			let temp = this.state.tasks;
 			let newTask = {
 				title: document.querySelector('.add-task__title').value,
@@ -185,6 +185,7 @@ class App extends Component {
 			}
 			temp.push(newTask);
 
+			console.log(document.querySelector('.add-task__title').value);
 			this.setState({ tasks: temp });
 			document.querySelector('.add-task__title').value = '';
 		}

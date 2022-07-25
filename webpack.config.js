@@ -19,8 +19,18 @@ module.exports = {
 				use: ["style-loader", "css-loader", "less-loader"],
 			},
 			{
-				test: /\.(jpeg|jpg|png|svg)$/,
-				use: ["file-loader"]
+				test: /\.(jpeg|webp|jpg|png|svg)$/,
+				use: [{
+					loader: "file-loader",
+					loader: 'img-optimize-loader',
+					options: {
+						compress: {
+							// This will transform your png/jpg into webp.
+							webp: true,
+							disableOnDevelopment: true,
+						},
+					},
+				}],
 			},
 			{
 				test: /\.m?jsx$/,

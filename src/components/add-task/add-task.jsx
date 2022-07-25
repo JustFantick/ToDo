@@ -4,6 +4,7 @@ class AddTask extends Component {
 	constructor(props) {
 		super(props);
 		this.interactBlock = this.interactBlock.bind(this);
+		this.inputEnterHandler = this.inputEnterHandler.bind(this);
 	}
 
 	interactBlock(e) {
@@ -26,11 +27,21 @@ class AddTask extends Component {
 		}
 	}
 
+	inputEnterHandler(e) {
+		if (e.which === 13) {
+			this.props.addTask();
+		}
+	}
+
 	render() {
 		return (
 			<footer className='add-task' onClick={this.interactBlock}>
 				<div className="add-task__plus"></div>
-				<input type={'text'} placeholder='Enter next task`s title' className="add-task__title" onKeyDown={this.props.func} />
+				<input type={'text'} className="add-task__title"
+					name='taskName' onKeyDown={this.inputEnterHandler}
+					placeholder='Enter next task`s title'
+				/>
+				<div className='add-task__send-icon icon-send' onClick={this.props.addTask}></div>
 
 			</footer>
 		);

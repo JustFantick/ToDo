@@ -13,7 +13,7 @@ class Main extends Component {
 					chooseTask={this.props.chooseTask}
 					taskStatusChangeHandler={this.props.taskStatusChangeHandler} />
 
-				<AddTask func={this.props.addTask} />
+				<AddTask addTask={this.props.addTask} />
 			</main>
 		);
 	}
