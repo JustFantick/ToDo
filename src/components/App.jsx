@@ -17,6 +17,7 @@ class App extends Component {
 		this.removeTask = this.removeTask.bind(this);
 		this.chooseTask = this.chooseTask.bind(this);
 		this.taskStatusChangeHandler = this.taskStatusChangeHandler.bind(this);
+		this.refreshTasks = this.refreshTasks.bind(this);
 
 		this.onTaskTitleChange = this.onTaskTitleChange.bind(this);
 		this.onTaskStepChange = this.onTaskStepChange.bind(this);
@@ -101,6 +102,32 @@ class App extends Component {
 			let tasks = JSON.parse(localStorage.getItem('tasks'));
 			this.setState({ tasks: tasks });
 		}
+	}
+
+	refreshTasks() {
+		let templateState = [{
+			title: 'Test task',
+			taskStatusDone: false,
+			steps: [{ stepDone: false, title: '1' }, { stepDone: false, title: '2' }],
+			lastEdit: new Date().toLocaleString('ru', {
+				hour: 'numeric',
+				minute: 'numeric',
+			}),
+			files: [],
+			filesURL: [],
+		},
+		{
+			title: 'Second test task',
+			taskStatusDone: false,
+			steps: [],
+			lastEdit: new Date().toLocaleString('ru', {
+				hour: 'numeric',
+				minute: 'numeric',
+			}),
+			files: [],
+			filesURL: [],
+		}];
+		this.setState({ tasks: templateState });
 	}
 
 	taskStatusChangeHandler(e) {
@@ -301,6 +328,7 @@ class App extends Component {
 					addTask={this.addTask}
 					chooseTask={this.chooseTask}
 					taskStatusChangeHandler={this.taskStatusChangeHandler}
+					refreshTasks={this.refreshTasks}
 				/>
 
 				<Sidebar

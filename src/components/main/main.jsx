@@ -7,7 +7,7 @@ class Main extends Component {
 	render() {
 		return (
 			<main className="main">
-				<Header />
+				<Header refreshTasks={this.props.refreshTasks} />
 
 				<TaskContainer tasks={this.props.tasksList}
 					chooseTask={this.props.chooseTask}
