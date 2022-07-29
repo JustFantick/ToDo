@@ -40,8 +40,11 @@
 
 	transition: all 0.3s ease-in;
 
-	&:hover {
-		background-color: rgba(0, 0, 0, 0.95);
+
+	@media (min-width: 769px) {
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.95);
+		}
 	}
 
 	&__title {
