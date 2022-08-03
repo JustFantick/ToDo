@@ -99,35 +99,35 @@ class App extends Component {
 
 		//check on already created tasks, saved in LocalStorage;
 		if (localStorage.getItem('tasks')) {
-			let tasks = JSON.parse(localStorage.getItem('tasks'));
-			this.setState({ tasks: tasks });
+			this.setState({ tasks: JSON.parse(localStorage.getItem('tasks')) });
 		}
 	}
 
 	refreshTasks() {
-		let templateState = [{
-			title: 'Test task',
-			taskStatusDone: false,
-			steps: [{ stepDone: false, title: '1' }, { stepDone: false, title: '2' }],
-			lastEdit: new Date().toLocaleString('ru', {
-				hour: 'numeric',
-				minute: 'numeric',
-			}),
-			files: [],
-			filesURL: [],
-		},
-		{
-			title: 'Second test task',
-			taskStatusDone: false,
-			steps: [],
-			lastEdit: new Date().toLocaleString('ru', {
-				hour: 'numeric',
-				minute: 'numeric',
-			}),
-			files: [],
-			filesURL: [],
-		}];
-		this.setState({ tasks: templateState });
+		this.setState({
+			tasks: [{
+				title: 'Test task',
+				taskStatusDone: false,
+				steps: [{ stepDone: false, title: '1' }, { stepDone: false, title: '2' }],
+				lastEdit: new Date().toLocaleString('ru', {
+					hour: 'numeric',
+					minute: 'numeric',
+				}),
+				files: [],
+				filesURL: [],
+			},
+			{
+				title: 'Second test task',
+				taskStatusDone: false,
+				steps: [],
+				lastEdit: new Date().toLocaleString('ru', {
+					hour: 'numeric',
+					minute: 'numeric',
+				}),
+				files: [],
+				filesURL: [],
+			}]
+		});
 	}
 
 	taskStatusChangeHandler(e) {
