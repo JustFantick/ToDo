@@ -23,9 +23,7 @@ class App extends Component {
 		this.onTaskStepChange = this.onTaskStepChange.bind(this);
 		this.updateEditingTime = this.updateEditingTime.bind(this);
 
-		this.deleteFile = this.deleteFile.bind(this);
-		this.addFile = this.addFile.bind(this);
-		this.onDropHandler = this.onDropHandler.bind(this);
+		this.saveNote = this.saveNote.bind(this);
 
 		this.state = {
 			tasks:
@@ -33,23 +31,21 @@ class App extends Component {
 					title: 'Test task',
 					taskStatusDone: false,
 					steps: [{ stepDone: false, title: '1' }, { stepDone: false, title: '2' }],
+					stepsNote: '',
 					lastEdit: new Date().toLocaleString('ru', {
 						hour: 'numeric',
 						minute: 'numeric',
 					}),
-					files: [],
-					filesURL: [],
 				},
 				{
 					title: 'Second test task',
 					taskStatusDone: false,
 					steps: [],
+					stepsNote: '',
 					lastEdit: new Date().toLocaleString('ru', {
 						hour: 'numeric',
 						minute: 'numeric',
 					}),
-					files: [],
-					filesURL: [],
 				}],
 			taskIndex: 0,
 		}
@@ -105,23 +101,21 @@ class App extends Component {
 			title: 'Test task',
 			taskStatusDone: false,
 			steps: [{ stepDone: false, title: '1' }, { stepDone: false, title: '2' }],
+			stepsNote: '',
 			lastEdit: new Date().toLocaleString('ru', {
 				hour: 'numeric',
 				minute: 'numeric',
 			}),
-			files: [],
-			filesURL: [],
 		},
 		{
 			title: 'Second test task',
 			taskStatusDone: false,
 			steps: [],
+			stepsNote: '',
 			lastEdit: new Date().toLocaleString('ru', {
 				hour: 'numeric',
 				minute: 'numeric',
 			}),
-			files: [],
-			filesURL: [],
 		}];
 		this.setState({ tasks: templateState });
 	}
@@ -199,6 +193,7 @@ class App extends Component {
 				title: document.querySelector('.add-task__title').value,
 				taskStatusDone: false,
 				steps: [],
+				stepsNote: '',
 				lastEdit: new Date().toLocaleString('ru', {
 					hour: 'numeric',
 					minute: 'numeric',
@@ -272,48 +267,9 @@ class App extends Component {
 		this.setState({ tasks: temp });
 	}
 
-	deleteFile(e) {
-		if (e.target.closest('.delete-step')) {
-			let temp = this.state.tasks;
-
-			let index = e.target.closest('.chosen-file').getAttribute('index');
-
-			temp[this.state.taskIndex].files.splice(index, 1);
-			temp[this.state.taskIndex].filesURL.splice(index, 1);
-
-			this.setState({ tasks: temp });
-			this.updateEditingTime();
-		}
-	}
-
-	addFile(e) {
-		let inputFiles = e.target.files;
-
+	saveNote(e) {
 		let temp = this.state.tasks;
-
-		for (const file of inputFiles) {
-			temp[this.state.taskIndex].files.push(file);//save file in state
-
-			let fileURL = URL.createObjectURL(file);
-			temp[this.state.taskIndex].filesURL.push(fileURL);//save url in state
-		}
-
-		this.setState({ tasks: temp });
-		this.updateEditingTime();
-	}
-
-	onDropHandler(e) {
-		e.preventDefault();
-		let files = [...e.dataTransfer.files];
-		let temp = this.state.tasks;
-
-		files.forEach(file => {
-			temp[this.state.taskIndex].files.push(file);
-
-			let fileURL = URL.createObjectURL(file);
-			temp[this.state.taskIndex].filesURL.push(fileURL);
-		});
-
+		temp[this.state.taskIndex].stepsNote = e.target.textContent;
 		this.setState({ tasks: temp });
 		this.updateEditingTime();
 	}
@@ -340,9 +296,7 @@ class App extends Component {
 					deleteStep={this.deleteStep}
 					stepStatusChangeHandler={this.stepStatusChangeHandler}
 
-					deleteFile={this.deleteFile}
-					onDropHandler={this.onDropHandler}
-					addFile={this.addFile}
+					saveNote={this.saveNote}
 				/>
 
 				<Popup tasksList={this.state.tasks}

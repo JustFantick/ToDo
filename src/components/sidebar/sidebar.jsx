@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SidebarHeader from '../sidebar-header/sidebar-header.jsx';
+import Notes from '../notes/notes.jsx';
 
 class Sidebar extends Component {
 	constructor(props) {
@@ -54,6 +55,9 @@ class Sidebar extends Component {
 						taskStatusChangeHandler={this.props.taskStatusChangeHandler}
 						stepStatusChangeHandler={this.props.stepStatusChangeHandler}
 					/>
+
+					<Notes saveNote={this.props.saveNote}
+						noteText={this.props.tasksList[this.props.currentTask].stepsNote} />
 
 				</div>
 
