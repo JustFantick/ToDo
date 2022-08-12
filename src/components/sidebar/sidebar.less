@@ -17,10 +17,7 @@
 	}
 
 	&__header {
-		@media (min-width: 430px) {
-			flex: 1 1 auto;
-		}
-
+		flex: 1 1 auto;
 		margin-bottom: #adapt(35, 30)[@value];
 		overflow-y: auto;
 		border-radius: 15px;
@@ -29,7 +26,7 @@
 			#generalChildParams();
 		}
 
-		padding-right: #adapt(10, 7)[@value];
+		//padding-right: #adapt(10, 7)[@value];
 
 		&::-webkit-scrollbar {
 			width: #adapt(7, 4)[@value];
@@ -45,15 +42,7 @@
 		}
 	}
 
-	@media (max-width: 430px) {
-		&__empty-space {
-			flex: 1 1 auto;
-		}
-
-		&__header {
-			margin-bottom: 15vh;
-		}
-	}
+	//@media (max-width: 430px) {}
 
 	&__bottom {
 		display: grid;

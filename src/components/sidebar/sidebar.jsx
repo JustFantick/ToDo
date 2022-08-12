@@ -42,8 +42,6 @@ class Sidebar extends Component {
 	render() {
 		return (
 			<aside className="sidebar">
-				<div className='sidebar__empty-space'></div>
-
 				<div className='sidebar__header'>
 					<SidebarHeader
 						tasksList={this.props.tasksList}
