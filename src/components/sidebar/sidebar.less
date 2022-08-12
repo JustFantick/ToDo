@@ -17,18 +17,16 @@
 	}
 
 	&__header {
-		flex: 1 1 auto;
+		@media (min-width: 430px) {
+			flex: 1 1 auto;
+		}
+
 		margin-bottom: #adapt(35, 30)[@value];
 		overflow-y: auto;
 		border-radius: 15px;
 
 		&>div {
 			#generalChildParams();
-			margin-top: #adapt(35, 30)[@value];
-		}
-
-		&>div:first-child {
-			margin-top: 0;
 		}
 
 		padding-right: #adapt(10, 7)[@value];
@@ -47,12 +45,13 @@
 		}
 	}
 
-	&__add-file {
-		flex: 1 1 auto;
-		margin: #adapt(35, 30)[@value] 0;
+	@media (max-width: 430px) {
+		&__empty-space {
+			flex: 1 1 auto;
+		}
 
-		&>div {
-			#generalChildParams();
+		&__header {
+			margin-bottom: 15vh;
 		}
 	}
 

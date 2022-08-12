@@ -78,8 +78,6 @@ class App extends Component {
 					hour: 'numeric',
 					minute: 'numeric',
 				}),
-				files: [],
-				filesURL: [],
 			},
 			{
 				title: 'Second test task',
@@ -89,8 +87,6 @@ class App extends Component {
 					hour: 'numeric',
 					minute: 'numeric',
 				}),
-				files: [],
-				filesURL: [],
 			}];
 			this.setState({ tasks: templateState });
 			this.componentDidUpdate();
@@ -207,8 +203,6 @@ class App extends Component {
 					hour: 'numeric',
 					minute: 'numeric',
 				}),
-				files: [],
-				filesURL: [],
 			}
 			temp.push(newTask);
 
@@ -292,14 +286,17 @@ class App extends Component {
 		}
 	}
 
-	addFile() {
-		let input = document.querySelector('.add-file__input');
+	addFile(e) {
+		let inputFiles = e.target.files;
 
 		let temp = this.state.tasks;
-		temp[this.state.taskIndex].files.push(input.files[0]);
 
-		let fileURL = URL.createObjectURL(input.files[0]);
-		temp[this.state.taskIndex].filesURL.push(fileURL);
+		for (const file of inputFiles) {
+			temp[this.state.taskIndex].files.push(file);//save file in state
+
+			let fileURL = URL.createObjectURL(file);
+			temp[this.state.taskIndex].filesURL.push(fileURL);//save url in state
+		}
 
 		this.setState({ tasks: temp });
 		this.updateEditingTime();

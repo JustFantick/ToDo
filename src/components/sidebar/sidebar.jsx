@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SidebarHeader from '../sidebar-header/sidebar-header.jsx';
-import AddFile from '../add-file/add-file.jsx';
 
 class Sidebar extends Component {
 	constructor(props) {
@@ -43,6 +42,8 @@ class Sidebar extends Component {
 	render() {
 		return (
 			<aside className="sidebar">
+				<div className='sidebar__empty-space'></div>
+
 				<div className='sidebar__header'>
 					<SidebarHeader
 						tasksList={this.props.tasksList}
@@ -54,12 +55,6 @@ class Sidebar extends Component {
 
 						taskStatusChangeHandler={this.props.taskStatusChangeHandler}
 						stepStatusChangeHandler={this.props.stepStatusChangeHandler}
-					/>
-					<AddFile deleteFile={this.props.deleteFile}
-						onDropHandler={this.props.onDropHandler}
-						addFile={this.props.addFile}
-						tasksList={this.props.tasksList}
-						currentTask={this.props.currentTask}
 					/>
 
 				</div>
