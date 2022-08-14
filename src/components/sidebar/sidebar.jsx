@@ -68,7 +68,7 @@ class Sidebar extends Component {
 								this.props.tasksList[this.props.currentTask].lastEdit : ''
 						}
 					</div>
-					<div onClick={this.openPopup} className='delete icon-bin'></div>
+					<div onClick={this.openPopup} className='delete ico-bin'></div>
 				</div>
 
 			</aside>
