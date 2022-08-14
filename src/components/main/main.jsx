@@ -11,6 +11,7 @@ class Main extends Component {
 
 				<TaskContainer tasks={this.props.tasksList}
 					chooseTask={this.props.chooseTask}
+					starStatusChange={this.props.starStatusChange}
 					taskStatusChangeHandler={this.props.taskStatusChangeHandler} />
 
 				<AddTask addTask={this.props.addTask} />

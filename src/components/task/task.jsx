@@ -11,7 +11,13 @@ function Task(props) {
 
 			<div className={props.taskStatus ? "task__title done" : "task__title"}> {props.title} </div>
 
-			<div onClick={starChange} className="task__star">★</div>
+			<div onClick={() => props.starStatusChange(props.index)}
+				className={
+					props.isImportant
+						? "task__star ico-star active"
+						: "task__star ico-star"
+				}>
+			</div>
 		</div>
 	)
 }

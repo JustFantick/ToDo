@@ -35,6 +35,8 @@ class TaskContainer extends Component {
 					{
 						this.props.tasks.map((task, index) => (
 							<Task key={index} index={index} title={task.title} chooseTask={this.props.chooseTask}
+								isImportant={task.isImportant}
+								starStatusChange={this.props.starStatusChange}
 								taskStatusChangeHandler={this.props.taskStatusChangeHandler}
 								taskStatus={this.props.tasks[index].taskStatusDone} />
 						))

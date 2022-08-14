@@ -9,8 +9,8 @@
 	font-display: block;
 }
 
-[class^="icon-"]::before,
-[class*=" icon-"]::before {
+[class^="ico-"]::before,
+[class*=" ico-"]::before {
 	font-family: 'icomoon' !important;
 	speak: never;
 	font-style: normal;
@@ -23,26 +23,26 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-bin:before {
+.ico-bin:before {
 	content: "\e900";
 	color: white;
 	font-size: #adapt(30, 22)[@value];
 }
 
-.icon-tick:before {
+.ico-tick:before {
 	content: "\e901";
 	color: white;
 	font-size: #adapt(13, 10)[@value];
 	font-weight: bold;
 }
 
-.icon-send:before {
+.ico-send:before {
 	content: "\e902";
 	color: white;
 	font-size: #adapt(27, 17)[@value];
 }
 
-.icon-refresh {
+.ico-refresh {
 	padding: 8px;
 	background-color: rgb(39, 39, 39);
 	border-radius: 5px;
@@ -68,10 +68,21 @@
 	}
 }
 
-.icon-star:before {
-	content: "\e904";
+.ico-back-Btn:before {
+	content: "\e905";
 }
 
-.icon-back-Btn:before {
-	content: "\e905";
+.ico-star {
+	&:before {
+		content: "\e906";
+		transition: color 0.3s ease-in;
+		font-size: 1.2em;
+		cursor: pointer;
+		color: transparent;
+		-webkit-text-stroke: 1px #9696E6;
+	}
+
+	&.active:before {
+		color: #9696E6;
+	}
 }

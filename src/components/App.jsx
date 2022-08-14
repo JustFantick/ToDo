@@ -18,6 +18,7 @@ class App extends Component {
 		this.chooseTask = this.chooseTask.bind(this);
 		this.taskStatusChangeHandler = this.taskStatusChangeHandler.bind(this);
 		this.refreshTasks = this.refreshTasks.bind(this);
+		this.starStatusChange = this.starStatusChange.bind(this);
 
 		this.onTaskTitleChange = this.onTaskTitleChange.bind(this);
 		this.onTaskStepChange = this.onTaskStepChange.bind(this);
@@ -30,6 +31,7 @@ class App extends Component {
 				[{
 					title: 'Test task',
 					taskStatusDone: false,
+					isImportant: true,
 					steps: [{ stepDone: false, title: '1' }, { stepDone: false, title: '2' }],
 					stepsNote: '',
 					lastEdit: new Date().toLocaleString('ru', {
@@ -40,6 +42,7 @@ class App extends Component {
 				{
 					title: 'Second test task',
 					taskStatusDone: false,
+					isImportant: false,
 					steps: [],
 					stepsNote: '',
 					lastEdit: new Date().toLocaleString('ru', {
@@ -69,6 +72,7 @@ class App extends Component {
 			let templateState = [{
 				title: 'Test task',
 				taskStatusDone: false,
+				isImportant: false,
 				steps: [{ stepDone: false, title: '1' }, { stepDone: false, title: '2' }],
 				lastEdit: new Date().toLocaleString('ru', {
 					hour: 'numeric',
@@ -78,6 +82,7 @@ class App extends Component {
 			{
 				title: 'Second test task',
 				taskStatusDone: false,
+				isImportant: false,
 				steps: [],
 				lastEdit: new Date().toLocaleString('ru', {
 					hour: 'numeric',
@@ -100,6 +105,7 @@ class App extends Component {
 		let templateState = [{
 			title: 'Test task',
 			taskStatusDone: false,
+			isImportant: false,
 			steps: [{ stepDone: false, title: '1' }, { stepDone: false, title: '2' }],
 			stepsNote: '',
 			lastEdit: new Date().toLocaleString('ru', {
@@ -110,6 +116,7 @@ class App extends Component {
 		{
 			title: 'Second test task',
 			taskStatusDone: false,
+			isImportant: false,
 			steps: [],
 			stepsNote: '',
 			lastEdit: new Date().toLocaleString('ru', {
@@ -192,6 +199,7 @@ class App extends Component {
 			let newTask = {
 				title: document.querySelector('.add-task__title').value,
 				taskStatusDone: false,
+				isImportant: false,
 				steps: [],
 				stepsNote: '',
 				lastEdit: new Date().toLocaleString('ru', {
@@ -274,6 +282,13 @@ class App extends Component {
 		this.updateEditingTime();
 	}
 
+	starStatusChange(index) {
+		let temp = this.state.tasks;
+		temp[index].isImportant = !temp[index].isImportant;
+		this.setState({ tasks: temp });
+		this.updateEditingTime();
+	}
+
 	render() {
 		return (
 			<div className="wrapper" style={{ backgroundImage: `url(${background})` }}>
@@ -282,6 +297,7 @@ class App extends Component {
 					chooseTask={this.chooseTask}
 					taskStatusChangeHandler={this.taskStatusChangeHandler}
 					refreshTasks={this.refreshTasks}
+					starStatusChange={this.starStatusChange}
 				/>
 
 				<Sidebar
