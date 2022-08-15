@@ -6,10 +6,17 @@ class Sidebar extends Component {
 	constructor(props) {
 		super(props)
 		this.openPopup = this.openPopup.bind(this);
+		this.hideSidebar = this.hideSidebar.bind(this);
 	}
 
 	openPopup() { document.querySelector('.popup').classList.add('active'); }
 
+	hideSidebar() {
+		document.querySelector('.wrapper').classList.remove('active');
+		document.querySelectorAll('.task').forEach((task) => {
+			task.classList.remove('active');
+		});
+	}
 	componentDidMount() {
 		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i
 			.test(navigator.userAgent)) {
@@ -62,6 +69,7 @@ class Sidebar extends Component {
 				</div>
 
 				<div className='sidebar__bottom'>
+					<div className='ico-back-Btn' onClick={this.hideSidebar}></div>
 					<div className='edditing-time'>
 						Last edit: {
 							this.props.tasksList[this.props.currentTask] ?

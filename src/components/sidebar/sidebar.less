@@ -51,27 +51,13 @@
 
 	&__bottom {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: 15% auto 15%;
 		grid-template-rows: 1fr;
 		justify-items: center;
 		align-items: center;
 
 		padding-top: 15px;
 		border-top: 1px solid rgba(255, 255, 255, 0.5);
-
-
-		& div:first-child {
-			grid-column-start: 1;
-			grid-column-end: 3;
-			transform: translate(25%, 0);
-		}
-
-		& div:last-child {
-			grid-column-start: 3;
-			grid-column-end: 4;
-			justify-self: right;
-			cursor: pointer;
-		}
 	}
 }
 

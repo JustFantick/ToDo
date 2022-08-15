@@ -9,7 +9,7 @@ export default function Status(props) {
 	return (
 		<div
 			onClick={props.statusChangeHandler} style={statusSize}
-			className={props.status ? "status icon-tick done" : "status icon-tick"} >
+			className={props.status ? "status ico-tick done" : "status icon-tick"} >
 		</div>
 	)
 }
