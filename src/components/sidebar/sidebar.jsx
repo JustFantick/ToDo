@@ -7,9 +7,17 @@ class Sidebar extends Component {
 		super(props)
 		this.openPopup = this.openPopup.bind(this);
 		this.hideSidebar = this.hideSidebar.bind(this);
+		this.state = { isPc: true };
 	}
 
-	openPopup() { document.querySelector('.popup').classList.add('active'); }
+	openPopup() {
+		document.querySelector('.popup').classList.add('active');
+		if (this.state.isPc) {
+			window.addEventListener("keyup", (e) => {
+				if (e.keyCode == 27) document.querySelector('.popup').classList.remove('active');
+			}, { once: true });
+		}
+	}
 
 	hideSidebar() {
 		document.querySelector('.wrapper').classList.remove('active');
@@ -20,6 +28,9 @@ class Sidebar extends Component {
 	componentDidMount() {
 		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i
 			.test(navigator.userAgent)) {
+			this.setState({
+				isPc: false
+			});
 			let x1, y1;
 
 			document.querySelector('.sidebar').addEventListener('touchstart', handleTouchStart);
