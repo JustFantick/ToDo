@@ -24,9 +24,9 @@ class Popup extends Component {
 								this.props.tasksList[this.props.currentTask].title : ''
 						}', right?
 					</div>
+					<button onClick={this.hidePopup} className='popup__cancel-btn'>Cancel</button>
 					<button onClick={this.props.removeTask}
 						className='popup__right-btn'>Delete</button>
-					<button onClick={this.hidePopup} className='popup__cancel-btn'>Cancel</button>
 				</div>
 			</div>
 		);
