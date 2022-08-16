@@ -41,7 +41,7 @@ class AddTask extends Component {
 					name='taskName' onKeyDown={this.inputEnterHandler}
 					placeholder='Enter next task`s title'
 				/>
-				<div className='add-task__send-icon icon-send' onClick={this.props.addTask}></div>
+				<div className='add-task__send-icon ico-send' onClick={this.props.addTask}></div>
 
 			</footer>
 		);
