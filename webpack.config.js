@@ -46,6 +46,9 @@ module.exports = {
 	},
 	plugins: [
 		new CleanWebpackPlugin(),
-		new HtmlWebpackPlugin({ template: "./src/index.html" }),
+		new HtmlWebpackPlugin({
+			template: "./src/index.html",
+			favicon: "./src/img/toDoIco.png"
+		}),
 	],
 };
