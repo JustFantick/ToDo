@@ -75,7 +75,8 @@ class Sidebar extends Component {
 					/>
 
 					<Notes saveNote={this.props.saveNote}
-						noteText={this.props.tasksList[this.props.currentTask].stepsNote} />
+						noteText={this.props.tasksList[this.props.currentTask] ?
+							this.props.tasksList[this.props.currentTask].stepsNote : ''} />
 
 				</div>
 

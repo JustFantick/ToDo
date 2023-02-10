@@ -36,7 +36,7 @@ class App extends Component {
 					stepsNote: '',
 					lastEdit: new Date().toLocaleString('ru', {
 						hour: 'numeric',
-						minute: 'numeric',
+						minute: 'numeric',	
 					}),
 				},
 				{
